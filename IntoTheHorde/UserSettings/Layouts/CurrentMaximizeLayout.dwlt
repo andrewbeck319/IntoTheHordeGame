@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 15732
+  controlID: 19095
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 15683
+  controlID: 19043
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 15661
+  controlID: 19021
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -194,8 +194,8 @@ MonoBehaviour:
     y: 0
     width: 284.5
     height: 478.5
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -232,10 +232,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 75.5}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: fa51fefffab8feff7ec0feff94c7feffc4fcfefffc57ffffc687ffff72bbffff
+      m_ExpandedIDs: fa51fefffab8feff7ec0feffc2c5feff94c7feffc4fcfefffc57ffffc687ffff72bbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -630,9 +630,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.2595586, y: 0.7348414, z: -0.38707, w: -0.49276188}
   m_Size:
-    m_Target: 6.7468066
+    m_Target: 4.0347147
     speed: 2
-    m_Value: 6.7468066
+    m_Value: 4.0347147
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -726,22 +726,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/External/Fire Particle Systems
+    - Assets/Resources/External/Medieval Models Pack/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Fire Particle Systems
+  - Assets/Resources/External/Medieval Models Pack/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/mobara/Documents/unr/CS328/IntoTheHordeGame/IntoTheHorde
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: acdb0000
-    m_LastClickedID: 56236
-    m_ExpandedIDs: 00000000d0b90000a0ba0000a8ba0000b0ba0000b8ba000000ca9a3b
+    scrollPos: {x: 0, y: 16.5}
+    m_SelectedIDs: 7cea0000
+    m_LastClickedID: 60028
+    m_ExpandedIDs: 00000000d0b90000a0ba0000a8ba0000b0ba0000b8ba000040ea000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -794,8 +794,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: e2d50000
-    m_LastClickedInstanceID: 54754
+    m_SelectedInstanceIDs: 7ad9fdff
+    m_LastClickedInstanceID: -140934
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300008cba0000
     m_RenameOverlay:
@@ -915,7 +915,7 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 54754
+  m_LastInspectedObjectInstanceID: -140934
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
