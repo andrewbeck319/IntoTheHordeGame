@@ -129,6 +129,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1508552990}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &69086004 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4661492396154689355, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1105408798}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f03d606716af4449d0b73676704630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &80057562
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 330203867}
   - component: {fileID: 330203866}
+  - component: {fileID: 330203870}
   - component: {fileID: 330203869}
   m_Layer: 0
   m_Name: Terrain
@@ -541,6 +554,17 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: d5fc3364cffa326408f12ce7c511661c, type: 2}
+--- !u!154 &330203870
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330203864}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: 0f6b9668b92ad43c1a539a30d6d8aa26, type: 2}
+  m_EnableTreeColliders: 1
 --- !u!1 &383450346
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585ff061e7afe6849a693411607cc21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 69086004}
 --- !u!1 &579375741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4673336093593970808, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
@@ -3111,7 +3135,7 @@ PrefabInstance:
     - target: {fileID: 889248544876209145, guid: 630f097dddbcd8b48a314d13183dfe64,
         type: 3}
       propertyPath: m_Name
-      value: Mob
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6780379963723323603, guid: 630f097dddbcd8b48a314d13183dfe64,
         type: 3}
