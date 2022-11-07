@@ -48,9 +48,7 @@ public class Node : MonoBehaviour {
 	void Start () {
 		locked = true;
 		canMove = true;
-		if (GetComponent <SpriteRenderer> () != null) {
-			GetComponent <SpriteRenderer> ().enabled = false;
-		}
+		
 		anim = player.GetComponent<Animator> ();
 		staticMap = isStatic.staticMap;
 	}
