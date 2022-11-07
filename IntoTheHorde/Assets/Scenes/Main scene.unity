@@ -2587,7 +2587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f77a6d5911964324b93b02fbfe34a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractionEntryPanelController: {fileID: 0}
+  InteractionEntryPanelController: {fileID: 1424983125}
 --- !u!1 &1544666748
 GameObject:
   m_ObjectHideFlags: 0
