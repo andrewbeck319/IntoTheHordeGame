@@ -23,7 +23,7 @@ public class Passcode : MonoBehaviour {
 
 	public AudioSource audioSource;
 	public AudioClip locked;
-	public AudioClip coin;
+	public AudioClip theme;
 
 	// Use this for initialization
 	void Start () {
@@ -252,7 +252,7 @@ public class Passcode : MonoBehaviour {
 		audioSource.Play ();
 	}
 	public void unlockSFX () {
-		audioSource.clip = coin;
+		audioSource.clip = theme;
 		audioSource.Play ();
 	}
 }
