@@ -8,12 +8,14 @@ public class Enemy : MonoBehaviour
 {
     public float lookRadius = 10f;
     private EnemySpawning enemySpawning;
+    private SpriteRenderer spriteRenderer;
     Transform target;
     NavMeshAgent agent;
     private void Start()
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
     }
     // Make sure this gets called when player attacks enemy
 
@@ -34,6 +36,8 @@ public class Enemy : MonoBehaviour
         if(distance <= lookRadius)
         {
             agent.SetDestination(target.position);
+            posRelativePlayer();
+        
             if(distance <= agent.stoppingDistance)
             {
                 //attack
@@ -57,5 +61,18 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    private void posRelativePlayer()
+    {
+        Vector3 relativePos = this.transform.InverseTransformPoint(target.position);
+        if(target.position.x - relativePos.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 }
