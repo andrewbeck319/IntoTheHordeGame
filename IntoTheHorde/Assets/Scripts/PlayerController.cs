@@ -43,11 +43,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, 0.5f, 0);
-            this.transform.Rotate(0, 0.2f, 0);
+            this.transform.Rotate(0, 100f * Time.deltaTime, 0);
         } else if (Input.GetKey(KeyCode.D))
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, -0.5f, 0);
-            this.transform.Rotate(0, -0.2f, 0);
+            this.transform.Rotate(0, -100f * Time.deltaTime, 0);
         }
 
         this._rotationManager.rotationY = this.transform.rotation.y;
