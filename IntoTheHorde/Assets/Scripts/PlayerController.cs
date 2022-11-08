@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     private bool _isRunning = false;
     private RotationManager _rotationManager;
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
         this._rotationManager = FindObjectOfType<RotationManager>();
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -22,10 +24,12 @@ public class PlayerController : MonoBehaviour
         {
             // this.GetComponent<Rigidbody>().AddForce(-transform.right);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
+            spriteRenderer.flipX = false;
         } else if (Input.GetKey(KeyCode.RightArrow))
         {
             // this.GetComponent<Rigidbody>().AddForce(transform.right);
             this.transform.Translate(Vector3.right * speed * Time.deltaTime);
+            spriteRenderer.flipX = true;
         }
         
         // test
