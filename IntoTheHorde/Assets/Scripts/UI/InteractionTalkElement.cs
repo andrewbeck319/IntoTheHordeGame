@@ -13,17 +13,26 @@ public class InteractionTalkElement
     public InteractionTalkElement(string sentence, string responseText)
     {
         this.TalkType = TalkTypeSelector.Sentence;
+        this.ResponseText = responseText;
+    }
+    
+    public InteractionTalkElement(string sentence)
+    {
+        this.TalkType = TalkTypeSelector.Sentence;
+        this.ResponseText = "OK!";
     }
     
     public InteractionTalkElement(string sentence, List<string> responsesText)
     {
         this.TalkType = TalkTypeSelector.Choice;
+        this.Choices = responsesText;
     }
 
     public TalkTypeSelector TalkType;
     public string Sentence;
     public string ResponseText = "OK";
     public List<string> Choices;
+    public List<int> LimitedToPaths = new List<int>();
 
     public void SetSentence(string sentence)
     {
@@ -38,5 +47,10 @@ public class InteractionTalkElement
     public void SetChoices(List<string> choices)
     {
         this.Choices = choices;
+    }
+
+    public void LimitToPaths(List<int> paths)
+    {
+        this.LimitedToPaths = paths;
     }
 }
