@@ -12,13 +12,12 @@ GameObject:
   - component: {fileID: 6780379963723323605}
   - component: {fileID: 6780379963723323603}
   - component: {fileID: 6780379963723323601}
-  - component: {fileID: 6780379963723323610}
   - component: {fileID: 6780379963723323611}
   - component: {fileID: 4977237431587422952}
   - component: {fileID: 7475940574382644455}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +37,7 @@ Transform:
   - {fileID: 6780379964335910844}
   - {fileID: 6680290414571796903}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 57.5, z: 0}
 --- !u!212 &6780379963723323605
 SpriteRenderer:
@@ -106,7 +105,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &6780379963723323601
 BoxCollider:
@@ -119,21 +118,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.9, y: 5.76, z: 0.20000002}
+  m_Size: {x: 5.9, y: 5.76, z: 0.4}
   m_Center: {x: -0.0000009536743, y: 0, z: 0}
---- !u!114 &6780379963723323610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889248544876209145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 437bab68460344200bc77f6f533e623c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotationManager: {fileID: 0}
 --- !u!114 &6780379963723323611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39023cadb4469464bbd3246f45378f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookRadius: 10
 --- !u!195 &7475940574382644455
 NavMeshAgent:
   m_ObjectHideFlags: 0
