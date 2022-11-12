@@ -4,8 +4,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private bool _isRunning = false;
-    private SpriteRenderer spriteRenderer;
-    private WeaponController weaponController;
+
+    private PlayerStats playerStats; 
+    private HealthHandler healthHandler;
+    private CharacterCombat characterCombat;
 
     enum FacingDirection
     {
@@ -19,8 +21,12 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.spriteRenderer = GetComponent<SpriteRenderer>();
-        this.weaponController = FindObjectOfType<WeaponController>();
+        playerStats = GetComponent<PlayerStats>();
+        healthHandler = GetComponent<HealthHandler>();
+        characterCombat = GetComponent<CharacterCombat>();
+
+        healthHandler.healthSystem.SetMaxHealth(playerStats.maxHealth);
+        healthHandler.healthSystem.SetHealthPercent(100);
     }
 
     // Update is called once per frame
@@ -50,7 +56,6 @@ public class PlayerController : MonoBehaviour
                 this.transform.GetChild(3).rotation = camRot;
             }
             facingDirection = FacingDirection.Left;
-            Debug.Log(facingDirection);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -70,7 +75,6 @@ public class PlayerController : MonoBehaviour
 
             }
             facingDirection = FacingDirection.Right;
-            Debug.Log(facingDirection);
         }
         
         // test
@@ -97,19 +101,17 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space))
         {
-            weaponController.Attack();
+            characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
     }
-    public void TakeDamage()
+    public void TakeDamage(CharacterStats stats)
     {
-        //Destroy(gameObject);
-        //// May cause problems with multiple spawners
-        //enemySpawning = FindObjectOfType<EnemySpawning>();
-        //enemySpawning.enemyCount--;
-        //if (enemySpawning.spawnTime <= 0 && enemySpawning.enemyCount <= 0)
-        //{
-        //    enemySpawning.spawnerDone = true;
-        //}
+        healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
+        if (playerStats.NeedsToDie())
+        {
+            Destroy(gameObject);
+            PlayerManager.instance.KillPlayer();
+        }//skill issue
     }
 }

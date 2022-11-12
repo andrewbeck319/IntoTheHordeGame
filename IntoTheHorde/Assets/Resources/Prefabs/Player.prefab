@@ -216,6 +216,9 @@ GameObject:
   - component: {fileID: 4673336093325500863}
   - component: {fileID: 4673336093325500850}
   - component: {fileID: 3508919665434698659}
+  - component: {fileID: 8706734745920315717}
+  - component: {fileID: 7151420004471618452}
+  - component: {fileID: 5380325675893165243}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -349,6 +352,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 4673336093325500856}
   mainCamera: {fileID: 1375956999234613936}
+--- !u!114 &8706734745920315717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673336093325500856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585ff061e7afe6849a693411607cc21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 4661492396154689355}
+--- !u!114 &7151420004471618452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673336093325500856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e39dc960b53f249aad7de61bcd1323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  damage:
+    baseValue: 10
+  armor:
+    baseValue: 0
+--- !u!114 &5380325675893165243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673336093325500856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52d3f09d2e891442b83b1830a33ccf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 5
+  attackDelay: 0
 --- !u!1 &4673336094507456211
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +636,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7638446359288597522}
-  - component: {fileID: 8147049506055195462}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -613,20 +659,6 @@ Transform:
   m_Father: {fileID: 4673336093325500858}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8147049506055195462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6703958770744398851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f885c8bfa6cd2cb40a624dc4a24efa3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 8933989778351196559}
-  CanAttack: 0
 --- !u!1 &8885480942872044149
 GameObject:
   m_ObjectHideFlags: 0

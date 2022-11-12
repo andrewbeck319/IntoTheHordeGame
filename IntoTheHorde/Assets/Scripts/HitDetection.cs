@@ -17,22 +17,19 @@ public class HitDetection : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if ((this.transform.parent.parent.tag == "Player") && (other.tag == "Enemy")) //can clean this up and standardize tags
         {
             Debug.Log("Enemy hit");
-
             GameObject enemy = other.gameObject;
             Enemy enemyController = enemy.GetComponent<Enemy>();
-            enemyController.TakeDamage();
-            //HealthHandler healthHandler = other.GetComponent<HealthHandler>();
-            //healthHandler.healthSystem.Damage(10);
+            enemyController.TakeDamage(GetComponentInParent<PlayerStats>());
         }
         if(other.tag == "Player")
         {
             Debug.Log("Player hit");
-
-            HealthHandler healthHandler = other.GetComponent<HealthHandler>();
-            healthHandler.healthSystem.Damage(10);
+            GameObject player = other.gameObject;
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            playerController.TakeDamage(GetComponentInParent<EnemyStats>());
         }
     }
 }

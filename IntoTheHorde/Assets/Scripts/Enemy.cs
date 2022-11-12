@@ -9,7 +9,11 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public float lookRadius = 10f;
-    private EnemySpawning enemySpawning;
+    private EnemyManager enemyManager;
+    private EnemyStats enemyStats;
+    private HealthHandler healthHandler;
+    private CharacterCombat characterCombat;
+
     Transform target;
     Transform mainCamera;
     NavMeshAgent agent;
@@ -25,23 +29,19 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        target = PlayerManager.instance.player.transform;
+        enemyManager = EnemyManager.instance;
+        enemyStats = GetComponent<EnemyStats>();
+        healthHandler = GetComponent<HealthHandler>();
+        characterCombat = GetComponent<CharacterCombat>();
+
         mainCamera = PlayerManager.instance.mainCamera.transform;
+        target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+
+        healthHandler.healthSystem.SetMaxHealth(enemyStats.maxHealth);
+        healthHandler.healthSystem.SetHealthPercent(100);
     }
     // Make sure this gets called when player attacks enemy
-
-    public void TakeDamage()
-    {
-        Destroy(gameObject);
-        // May cause problems with multiple spawners
-        enemySpawning = FindObjectOfType<EnemySpawning>();
-        enemySpawning.enemyCount--;
-        if(enemySpawning.spawnTime <= 0 && enemySpawning.enemyCount <= 0)
-        {
-            enemySpawning.spawnerDone = true;
-        }
-    }
 
     private void Update()
     {
@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
                 //attack
                 //Right now there's no transform for "front" that keeps in mind sprite direction or player direction (think sphere at the tip of the weapon)
                 //Once there is and it's standardized into a prefab, we can look into facing
+                characterCombat.Attack();
 
                 //face target probably will need to be offset by the 90 degress in either direction?
                 //FaceTarget();
@@ -100,6 +101,13 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    public void TakeDamage(CharacterStats stats)
+    {
+        healthHandler.healthSystem.Damage(enemyStats.TakeDamage(stats.damage.GetValue()));
+        if (enemyStats.NeedsToDie()) Destroy(gameObject);
+        enemyManager.OnEnemyDestroyed();
     }
 
     /*
