@@ -31,6 +31,14 @@ public class InteractionTalkController : MonoBehaviour
         this.currentPath = 0;
         Debug.Log("Current index before init = " + this.currentElementIndex);
         this.Next();
+        FindObjectOfType<CameraController>().GetComponent<CameraController>().PlayAnimation(CameraController.AnimationSelector.NpcTalk);
+    }
+
+    public void StopTalk()
+    {
+        GameManager.Instance.UiManager.InteractionTalkPanelController.Hide();
+        this.isActive = false;
+        FindObjectOfType<CameraController>().GetComponent<CameraController>().PlayAnimation(CameraController.AnimationSelector.Normal);
     }
 
     public void Next()
@@ -47,8 +55,7 @@ public class InteractionTalkController : MonoBehaviour
         {
             // no more elements, end the talk interaction
             Debug.Log("no more elements, end the talk interaction, index = " + newIndex + ", count = " + this.Elements.Count);
-            GameManager.Instance.UiManager.InteractionTalkPanelController.Hide();
-            this.isActive = false;
+            this.StopTalk();
         }
         else
         {
