@@ -5,6 +5,7 @@ using UnityEngine;
 public class UiManager : MonoBehaviour
 {
     public InteractionEntryPanelController InteractionEntryPanelController;
+    public InteractionTalkPanelController InteractionTalkPanelController;
     
     void Start()
     {

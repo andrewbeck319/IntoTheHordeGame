@@ -21,15 +21,21 @@ public class InteractionAreaController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered");
-        this.NpcController.OnPlayerEnter();
-        this.IsPlayerInside = true;
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Trigger entered");
+            this.NpcController.OnPlayerEnter();
+            this.IsPlayerInside = true;            
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Trigger exited");
-        this.NpcController.OnPlayerExit();
-        this.IsPlayerInside = false;
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Trigger exited");
+            this.NpcController.OnPlayerExit();
+            this.IsPlayerInside = false;
+        }
     }
 }
