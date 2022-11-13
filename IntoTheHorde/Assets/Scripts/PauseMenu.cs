@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    // isPaused can be used to check if player inputs should be allowed
     public static bool isPaused;
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,7 @@ public class PauseMenu : MonoBehaviour
     public void ToMainMenu()
     {
         /*
+        isPaused = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu"); //Uncomment this when main menu is implemented
         */
