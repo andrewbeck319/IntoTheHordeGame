@@ -4,23 +4,16 @@ using UnityEngine;
 public class HealthHandler : MonoBehaviour
 {
     public HealthBarScript healthBar;
-    // Start is called before the first frame update
-    private void Start()
+    [HideInInspector] public HealthSystem healthSystem;
+
+    private void Awake()
     {
         // Create our new health system with a max health amount
-        HealthSystem healthSystem = new HealthSystem(100); 
+        healthSystem = new HealthSystem(100); 
         
         // Setup the health bar for this health system
         healthBar.SetUp(healthSystem);
 
-        // In case testing needed
-        // Debug.Log("Health: " + healthSystem.GetHealthPercent());
-        // healthSystem.Damage(1);
-        // Debug.Log("Health: " + healthSystem.GetHealth());
-        // healthSystem.Heal(10);
-        // Debug.Log("Health: " + healthSystem.GetHealth());
-        // healthSystem.Damage(50);
-        // Debug.Log("Health: " + healthSystem.GetHealth());
 
     }
 

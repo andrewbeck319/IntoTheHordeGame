@@ -1,17 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private bool _isRunning = false;
-    private RotationManager _rotationManager;
-    private SpriteRenderer spriteRenderer;
+
+    private PlayerStats playerStats; 
+    private HealthHandler healthHandler;
+    private CharacterCombat characterCombat;
+
+    enum FacingDirection
+    {
+        Left,
+        Right
+    }
+
+    private FacingDirection facingDirection = FacingDirection.Left;
+    private FacingDirection lastFacingDirection = FacingDirection.Left;
+
     // Start is called before the first frame update
     void Start()
     {
-        this._rotationManager = FindObjectOfType<RotationManager>();
-        this.spriteRenderer = GetComponent<SpriteRenderer>();
+        playerStats = GetComponent<PlayerStats>();
+        healthHandler = GetComponent<HealthHandler>();
+        characterCombat = GetComponent<CharacterCombat>();
+
+        healthHandler.healthSystem.SetMaxHealth(playerStats.maxHealth);
+        healthHandler.healthSystem.SetHealthPercent(100);
     }
 
     // Update is called once per frame
@@ -24,12 +39,42 @@ public class PlayerController : MonoBehaviour
         {
             // this.GetComponent<Rigidbody>().AddForce(-transform.right);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
-            spriteRenderer.flipX = false;
-        } else if (Input.GetKey(KeyCode.RightArrow))
+
+            //spriteRenderer.flipX = false; gotta flip the whole gameobject
+            //Quaternion lookRotation = Quaternion.LookRotation(new Vector3(0, 180,0));
+            if(facingDirection != FacingDirection.Left) //then we gotta rotate the gameobject, and since the camera is a child, reset its rotation manually
+            {
+                //cam before
+                Transform camGet = this.transform.GetChild(3);
+                Vector3 camPos = camGet.position;
+                Quaternion camRot = camGet.rotation;
+
+                transform.RotateAround(transform.position, transform.up, 180f);
+
+                //cam after
+                this.transform.GetChild(3).position = camPos;
+                this.transform.GetChild(3).rotation = camRot;
+            }
+            facingDirection = FacingDirection.Left;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             // this.GetComponent<Rigidbody>().AddForce(transform.right);
-            this.transform.Translate(Vector3.right * speed * Time.deltaTime);
-            spriteRenderer.flipX = true;
+            this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
+            //spriteRenderer.flipX = true; gotta flip the whole gameobject
+
+            if(facingDirection != FacingDirection.Right)
+            {
+                Transform camGet = this.transform.GetChild(3);
+                Vector3 camPos = camGet.position;
+                Quaternion camRot = camGet.rotation;
+
+                transform.RotateAround(transform.position, transform.up, -180f);
+                this.transform.GetChild(3).position = camPos;
+                this.transform.GetChild(3).rotation = camRot;
+
+            }
+            facingDirection = FacingDirection.Right;
         }
         
         // test
@@ -54,8 +99,19 @@ public class PlayerController : MonoBehaviour
             this.transform.Rotate(0, -100f * Time.deltaTime, 0);
         }
 
-        this._rotationManager.rotationY = this.transform.rotation.y;
-        this._rotationManager.rotation = this.transform.rotation;
-
+        if(Input.GetKey(KeyCode.Space))
+        {
+            characterCombat.Attack();
+        }
+        lastFacingDirection = facingDirection;
+    }
+    public void TakeDamage(CharacterStats stats)
+    {
+        healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
+        if (playerStats.NeedsToDie())
+        {
+            Destroy(gameObject);
+            PlayerManager.instance.KillPlayer();
+        }//skill issue
     }
 }

@@ -25,6 +25,22 @@ public class HealthSystem
         return (float)Health / MaxHealth;
     }
 
+    public void SetHealth(int health)
+    {
+        if (health <= MaxHealth) Health = health;
+    }
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        MaxHealth = maxHealth;
+    }
+
+    // set health, 99% => SetHealthPercent(99.0f)
+    public void SetHealthPercent(float healthPct)
+    {
+        Health = (int)((healthPct/100) * MaxHealth);
+    }
+
     // Enables damage to be done to the player or enemy 
     public void Damage(int DamageAmt){
         Health -= DamageAmt;
