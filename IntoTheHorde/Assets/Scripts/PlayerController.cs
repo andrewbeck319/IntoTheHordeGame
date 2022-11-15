@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+	[SerializeField] private Animator Animationcontroller; 
     private bool _isRunning = false;
 
     private PlayerStats playerStats; 
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+			Animationcontroller.SetBool("walk",true);
             // this.GetComponent<Rigidbody>().AddForce(-transform.right);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
 
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
+			Animationcontroller.SetBool("walk",true);
             // this.GetComponent<Rigidbody>().AddForce(transform.right);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
             //spriteRenderer.flipX = true; gotta flip the whole gameobject
@@ -104,6 +107,10 @@ public class PlayerController : MonoBehaviour
             characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
+		 if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.Space))
+         {
+			Animationcontroller.SetBool("walk",false);
+		 }
     }
     public void TakeDamage(CharacterStats stats)
     {
