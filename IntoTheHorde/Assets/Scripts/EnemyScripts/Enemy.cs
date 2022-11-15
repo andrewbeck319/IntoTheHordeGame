@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     private FacingDirection facingDirection = FacingDirection.Left;
     private FacingDirection lastFacingDirection = FacingDirection.Left;
 
-    private void Start()
+    private void OnEnable()
     {
         enemyManager = EnemyManager.instance;
         enemyStats = GetComponent<EnemyStats>();
