@@ -53,17 +53,17 @@ public class CharacterCombat : MonoBehaviour {
 		// Check each obj thats within weapon hitbox and determine whether or not damage should be induced or not
 		foreach(GameObject obj in weaponHitbox.gameObject.GetComponent<HitDetection>().hitableObjects){
 			if ((this.gameObject.tag == "Player") && (obj.tag == "Enemy")) //can clean this up and standardize tags
-				{
-					Debug.Log("Enemy hit");
-					Enemy enemyController = obj.GetComponent<Enemy>();
-					enemyController.TakeDamage(GetComponentInParent<PlayerStats>());
-				}
-				if(obj.tag == "Player")
-				{
-					Debug.Log("Player hit");
-					PlayerController playerController = obj.GetComponent<PlayerController>();
-					playerController.TakeDamage(GetComponentInParent<EnemyStats>());
-				}
+			{
+				Debug.Log("Enemy hit");
+				Enemy enemyController = obj.GetComponent<Enemy>();
+				enemyController.TakeDamage(GetComponentInParent<PlayerStats>());
+			}
+			if(obj.tag == "Player")
+			{
+				Debug.Log("Player hit");
+				PlayerController playerController = obj.GetComponent<PlayerController>();
+				playerController.TakeDamage(GetComponentInParent<EnemyStats>());
+			}
 		}
         weaponAnimator.SetFloat("AttackSpeed", attackSpeed);
         weaponAnimator.SetTrigger("Attack");

@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     private FacingDirection facingDirection = FacingDirection.Left;
     private FacingDirection lastFacingDirection = FacingDirection.Left;
 
-    private void OnEnable()
+    private void Start() //This has got to be start
     {
         enemyManager = EnemyManager.instance;
         enemyStats = GetComponent<EnemyStats>();
@@ -101,6 +101,17 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+        //Gizmos.color = Color.blue;
+        //Vector3 mainCameraNormalized = mainCamera.position;
+        //mainCameraNormalized.y = target.position.y;
+        //Vector3 originVector = (target.position - mainCameraNormalized);
+        //Gizmos.DrawLine(mainCameraNormalized, target.position);
+        //Gizmos.color = Color.red;
+        //Vector3 enemyNormalized = this.transform.position;
+        //enemyNormalized.y = target.position.y;
+        //Vector3 directionVector = (enemyNormalized - mainCameraNormalized);
+        //
+        //Gizmos.DrawLine(mainCameraNormalized, enemyNormalized);
     }
 
     public void TakeDamage(CharacterStats stats)

@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 4673336093325500861}
   - component: {fileID: 4673336093325500863}
   - component: {fileID: 4673336093325500850}
-  - component: {fileID: 3508919665434698659}
+  - component: {fileID: 9101019194744357975}
   - component: {fileID: 8706734745920315717}
   - component: {fileID: 7151420004471618452}
   - component: {fileID: 5380325675893165243}
@@ -370,7 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db63808d4cf394ad69fa58671951b251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3508919665434698659
+  Animationcontroller: {fileID: 0}
+--- !u!114 &9101019194744357975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -382,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2e69e9407444346b0142fa4f996c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4673336093325500856}
+  player: {fileID: 0}
   mainCamera: {fileID: 1375956999234613936}
 --- !u!114 &8706734745920315717
 MonoBehaviour:
@@ -870,3 +871,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a79034f41a03646b5c5a198b080fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitableObjects: []

@@ -40,6 +40,7 @@ public class EnemySpawning : MonoBehaviour
 
         if(canSpawn)
         {
+
             Instantiate(enemies[Random.Range(0, enemies.Length)], currentPoint.transform.position, Quaternion.identity);
             enemyCount++;
         }

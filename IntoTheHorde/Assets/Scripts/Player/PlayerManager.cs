@@ -11,14 +11,16 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player");
-        mainCamera = GameObject.Find("Main Camera");
+        //mainCamera = GameObject.Find("Player/CameraContainer/Main Camera");
+        Debug.Log(mainCamera.name);
+        Debug.Assert(mainCamera != null);
     }
     private void Awake()
     {
         instance = this;
     }
     #endregion
-    public GameObject player;
+    [HideInInspector] public GameObject player;
     public GameObject mainCamera;
     public void KillPlayer()
     {

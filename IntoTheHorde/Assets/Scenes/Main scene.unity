@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330203864}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3df27b9289d1e8c4fb82e0df4f4673ba, type: 3}
   m_Name: 
@@ -1985,18 +1985,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 219315841}
---- !u!114 &560374776 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3508919665434698659, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
-    type: 3}
-  m_PrefabInstance: {fileID: 1105408798}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560374769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc2e69e9407444346b0142fa4f996c51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &560374785
 Animator:
   serializedVersion: 4
@@ -2460,7 +2448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiManager: {fileID: 1542128691}
-  playerManager: {fileID: 560374776}
+  playerManager: {fileID: 0}
 --- !u!4 &758651931
 Transform:
   m_ObjectHideFlags: 0
@@ -3321,6 +3309,11 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3508919665434698659, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1770379372}
     - target: {fileID: 4167394914803326644, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
         type: 3}
       propertyPath: m_Size.x
@@ -3420,6 +3413,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673336093325500859, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4673336093325500859, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
         type: 3}
