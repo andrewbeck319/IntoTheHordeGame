@@ -20,6 +20,10 @@ public class HealthSystem
         return Health;
     }
 
+    public int GetMaxHealth()
+    {
+        return MaxHealth;
+    }
     // Return health as a percent to adjust health bar by
     public float GetHealthPercent(){
         return (float)Health / MaxHealth;

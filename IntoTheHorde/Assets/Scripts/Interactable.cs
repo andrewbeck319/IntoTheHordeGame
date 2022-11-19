@@ -11,10 +11,10 @@ public class Interactable : MonoBehaviour {
 	public float radius = 3f;				// How close do we need to be to interact?
 	public Transform interactionTransform;	// The transform from where we interact in case you want to offset it
 
-	bool isFocus = false;	// Is this interactable currently being focused?
-	Transform player;		// Reference to the player transform
+	protected bool isFocus = false; // Is this interactable currently being focused?
+	[SerializeField] protected Transform player; // Reference to the player transform
 
-	bool hasInteracted = false;	// Have we already interacted with the object?
+	protected bool hasInteracted = false;	// Have we already interacted with the object?
 
 	public virtual void Interact ()
 	{
@@ -35,6 +35,20 @@ public class Interactable : MonoBehaviour {
 				// Interact with the object
 				Interact();
 				hasInteracted = true;
+			}
+		}
+
+		// I'm not sure how the focus mechanic works so I'm going to try something else here
+		PlayerController pc = player.gameObject.GetComponent<PlayerController>();
+		if (pc.playerInteracted)
+        {
+			float distance = Vector3.Distance(player.position, interactionTransform.position);
+			if (distance <= radius)
+			{
+				// Interact with the object
+				Interact();
+				hasInteracted = true;
+				pc.playerInteracted = false;
 			}
 		}
 	}

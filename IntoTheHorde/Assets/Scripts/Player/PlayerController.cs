@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private HealthHandler healthHandler;
     private CharacterCombat characterCombat;
 
+    public bool playerInteracted = false;
     enum FacingDirection
     {
         Left,
@@ -107,10 +108,15 @@ public class PlayerController : MonoBehaviour
             characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
-		 if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.Space))
-         {
-			Animationcontroller.SetBool("walk",false);
-		 }
+		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.Space))
+        {
+		Animationcontroller.SetBool("walk",false);
+		}
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            playerInteracted = true;
+        }
     }
     public void TakeDamage(CharacterStats stats)
     {
