@@ -93,6 +93,7 @@ public class InteractionTalkController : MonoBehaviour
 
         if (responseData.Function != null)
         {
+            // this does not work, to be fixed
             responseData.Function.Invoke();
         }
         

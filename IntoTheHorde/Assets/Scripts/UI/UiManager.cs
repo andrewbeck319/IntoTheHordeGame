@@ -6,6 +6,7 @@ public class UiManager : MonoBehaviour
 {
     public InteractionEntryPanelController InteractionEntryPanelController;
     public InteractionTalkPanelController InteractionTalkPanelController;
+    public DeathScreenController DeathScreenController;
     
     void Start()
     {
