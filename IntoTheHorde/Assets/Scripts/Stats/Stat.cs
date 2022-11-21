@@ -35,4 +35,8 @@ public class Stat {
 			modifiers.Remove(modifier);
 	}
 
+	public void SetStat(int newStat)
+    {
+		baseValue = newStat;
+    }
 }
