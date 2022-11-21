@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class ChestInteractable : Interactable
 {
     private HealthHandler hh;
     private HealthSystem hs;
     private PlayerStats ps;
     private CharacterCombat cc;
+    [SerializeField] private TMP_Text text;
 
     public void Start()
     {
@@ -16,6 +17,7 @@ public class ChestInteractable : Interactable
         ps = player.gameObject.GetComponent<PlayerStats>();
         cc = player.gameObject.GetComponent<CharacterCombat>();
     }
+
     public override void Interact()
     {
         base.Interact();
@@ -32,22 +34,27 @@ public class ChestInteractable : Interactable
                 break;
             case int n when (n > 40 && n <= 45):
                 ps.BuffDamage(1.05f);
+                StartCoroutine(setText("Damage buffed by 5 percent"));
                 Debug.Log("Damage buffed by 5 percent");
                 break;
             case int n when (n > 45 && n <= 50):
                 cc.atkSpdBuff(1.03f);
+                StartCoroutine(setText("Attack Speed buffed by 3 percent"));
                 Debug.Log("Attack Speed buffed by 3 percent");
                 break;
             default:
+                StartCoroutine(setText("You opened a chest full of nothing :("));
                 Debug.Log("You Opened a Chest Full of Nothing :(");
                 break;
         }
+        text.enabled = true;
 
     }
 
     private void healPlayer()
     {
         hs.Heal(10);
+        StartCoroutine(setText("Healed player by 10 HP")); 
         Debug.Log("Healed player by 10 HP");
     }
 
@@ -56,7 +63,15 @@ public class ChestInteractable : Interactable
         int increase = (int)(0.05f * hs.GetMaxHealth());
         int newMaxHP = hs.GetMaxHealth() + increase;
         hs.SetMaxHealth(newMaxHP);
+        StartCoroutine(setText("Health increased to " + newMaxHP));
         Debug.Log("Health Increased to: " + newMaxHP);
     }
 
+    private IEnumerator setText(string text)
+    {
+        this.text.SetText(text);
+        this.text.enabled = true;
+        yield return new WaitForSeconds(5);
+        this.text.enabled = false;
+    }
 }
