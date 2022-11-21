@@ -81,4 +81,8 @@ public class CharacterCombat : MonoBehaviour {
         // weaponHitbox.gameObject.SetActive(false);
     }
 
+	public void atkSpdBuff(float percent)
+    {
+		attackSpeed = attackSpeed * percent;
+    }
 }

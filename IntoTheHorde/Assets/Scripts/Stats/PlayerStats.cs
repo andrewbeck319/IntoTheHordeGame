@@ -29,4 +29,11 @@ public class PlayerStats : CharacterStats {
 		}
 		
 	}
+
+	public void BuffDamage(float percent)
+    {
+		int currentDamage = this.damage.GetValue();
+		int newDamage = (int)System.Math.Ceiling(currentDamage * percent);
+		this.damage.SetStat(newDamage);
+    }
 }
