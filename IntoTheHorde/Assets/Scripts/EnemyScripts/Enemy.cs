@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     private void Start() //This has got to be start
     {
-        enemyManager = EnemyManager.instance;
+        enemyManager = FindObjectOfType<EnemyManager>();
         enemyStats = GetComponent<EnemyStats>();
         healthHandler = GetComponent<HealthHandler>();
         characterCombat = GetComponent<CharacterCombat>();
@@ -55,15 +55,7 @@ public class Enemy : MonoBehaviour
             
             if(distance <= agent.stoppingDistance)
             {
-                //attack
-                //Right now there's no transform for "front" that keeps in mind sprite direction or player direction (think sphere at the tip of the weapon)
-                //Once there is and it's standardized into a prefab, we can look into facing
                 characterCombat.Attack();
-
-                //face target probably will need to be offset by the 90 degress in either direction?
-                //FaceTarget();
-                //lets try this for when we create attacking ability first
-                //transform.LookAt(target, Vector3.left);
             }
         }
 
@@ -117,22 +109,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(CharacterStats stats)
     {
         healthHandler.healthSystem.Damage(enemyStats.TakeDamage(stats.damage.GetValue()));
-        if (enemyStats.NeedsToDie()) Destroy(gameObject);
-        enemyManager.OnEnemyDestroyed();
-    }
-
-    /*
-    private void posRelativePlayer()
-    {
-        Vector3 relativePos = this.transform.InverseTransformPoint(target.position);
-        if(target.position.x - relativePos.x < 0)
+        if (enemyStats.NeedsToDie())
         {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
+            enemyManager.OnEnemyDestroyed();
+            Destroy(gameObject);
         }
     }
-    */
 }

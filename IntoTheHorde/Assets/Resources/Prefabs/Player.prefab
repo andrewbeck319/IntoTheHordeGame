@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animationcontroller: {fileID: 0}
+  playerInteracted: 0
 --- !u!114 &9101019194744357975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2e69e9407444346b0142fa4f996c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4673336093325500856}
   mainCamera: {fileID: 1375956999234613936}
 --- !u!114 &8706734745920315717
 MonoBehaviour:

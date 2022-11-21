@@ -6,16 +6,17 @@ public class EnemyManager : MonoBehaviour
 {
     #region Singleton
     public static EnemyManager instance;
+    public EnemySpawning enemySpawning;
+
     private void Start()
     {
-        enemySpawning = GetComponentInChildren<EnemySpawning>();
+        enemySpawning = GetComponent<EnemySpawning>();
     }
     private void Awake()
     {
         instance = this;
     }
     #endregion
-    private EnemySpawning enemySpawning;
 
     public void OnEnemyDestroyed()
     {

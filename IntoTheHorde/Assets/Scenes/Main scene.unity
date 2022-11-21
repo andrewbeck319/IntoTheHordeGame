@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276774, g: 0.21589115, b: 0.2978246, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -31050,6 +31050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1219478414}
   - component: {fileID: 1219478413}
+  - component: {fileID: 1219478415}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -31098,6 +31099,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1219478415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219478412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03cd7246c4943934797d281a745436c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawning: {fileID: 1219478413}
 --- !u!1001 &1220383922
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,8 +10,6 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
     private void Start()
     {
-        player = GameObject.Find("Player");
-        //mainCamera = GameObject.Find("Player/CameraContainer/Main Camera");
         Debug.Log(mainCamera.name);
         Debug.Assert(mainCamera != null);
     }
@@ -20,7 +18,7 @@ public class PlayerManager : MonoBehaviour
         instance = this;
     }
     #endregion
-    [HideInInspector] public GameObject player;
+    public GameObject player;
     public GameObject mainCamera;
     public void KillPlayer()
     {

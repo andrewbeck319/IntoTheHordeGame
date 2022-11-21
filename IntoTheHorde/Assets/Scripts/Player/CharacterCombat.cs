@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterStats))]
@@ -48,21 +50,26 @@ public class CharacterCombat : MonoBehaviour {
 	}
 	private void DoAttack()
 	{
-        // weaponHitbox.gameObject.SetActive(true);
+		// weaponHitbox.gameObject.SetActive(true);
 
 		// Check each obj thats within weapon hitbox and determine whether or not damage should be induced or not
-		foreach(GameObject obj in weaponHitbox.gameObject.GetComponent<HitDetection>().hitableObjects){
-			if ((this.gameObject.tag == "Player") && (obj.tag == "Enemy")) //can clean this up and standardize tags
+		List<GameObject> objects = weaponHitbox.gameObject.GetComponent<HitDetection>().hitableObjectsConsumer; //call this once and get the list, not on every iteration
+        foreach (GameObject obj in objects)
+		{
+			if (obj) //gotta check if the thing is still alive, let
 			{
-				Debug.Log("Enemy hit");
-				Enemy enemyController = obj.GetComponent<Enemy>();
-				enemyController.TakeDamage(GetComponentInParent<PlayerStats>());
-			}
-			if(obj.tag == "Player")
-			{
-				Debug.Log("Player hit");
-				PlayerController playerController = obj.GetComponent<PlayerController>();
-				playerController.TakeDamage(GetComponentInParent<EnemyStats>());
+				if ((this.gameObject.tag == "Player") && (obj.tag == "Enemy"))
+				{
+					Debug.Log("Enemy hit");
+					Enemy enemyController = obj.GetComponent<Enemy>();
+					enemyController.TakeDamage(GetComponentInParent<PlayerStats>());
+				}
+				if (obj.tag == "Player")
+				{
+					Debug.Log("Player hit");
+					PlayerController playerController = obj.GetComponent<PlayerController>();
+					playerController.TakeDamage(GetComponentInParent<EnemyStats>());
+				}
 			}
 		}
         weaponAnimator.SetFloat("AttackSpeed", attackSpeed);
