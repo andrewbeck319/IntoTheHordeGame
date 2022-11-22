@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-
+using System.Collections;
 public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private Animator Animationcontroller; 
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.E))
         {
-            playerInteracted = true;
+            StartCoroutine(PlayerInteract());
         }
     }
     public void TakeDamage(CharacterStats stats)
@@ -128,5 +128,11 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             PlayerManager.instance.KillPlayer();
         }//skill issue
+    }
+    private IEnumerator PlayerInteract()
+    {
+        playerInteracted = true;
+        yield return new WaitForSeconds(1);
+        playerInteracted = false;
     }
 }

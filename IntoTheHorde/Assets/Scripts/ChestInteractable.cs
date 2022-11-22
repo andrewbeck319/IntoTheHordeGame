@@ -8,6 +8,7 @@ public class ChestInteractable : Interactable
     private HealthSystem hs;
     private PlayerStats ps;
     private CharacterCombat cc;
+    private bool interactable = true;
     [SerializeField] private TMP_Text text;
 
     public void Start()
@@ -20,35 +21,38 @@ public class ChestInteractable : Interactable
 
     public override void Interact()
     {
-        base.Interact();
-        System.Random rnd = new System.Random();
-        int rndNumber = rnd.Next(0, 51); // 
-
-        switch(rndNumber)
+        if(interactable)
         {
-            case int n when (n <= 30):
-                healPlayer();
-                break;
-            case int n when (n > 30 && n <= 40):
-                healthIncrease();
-                break;
-            case int n when (n > 40 && n <= 45):
-                ps.BuffDamage(1.05f);
-                StartCoroutine(setText("Damage buffed by 5 percent"));
-                Debug.Log("Damage buffed by 5 percent");
-                break;
-            case int n when (n > 45 && n <= 50):
-                cc.atkSpdBuff(1.03f);
-                StartCoroutine(setText("Attack Speed buffed by 3 percent"));
-                Debug.Log("Attack Speed buffed by 3 percent");
-                break;
-            default:
-                StartCoroutine(setText("You opened a chest full of nothing :("));
-                Debug.Log("You Opened a Chest Full of Nothing :(");
-                break;
-        }
-        Destroy(this);
+            base.Interact();
+            System.Random rnd = new System.Random();
+            int rndNumber = rnd.Next(0, 51); // 
 
+            switch (rndNumber)
+            {
+                case int n when (n <= 30):
+                    healPlayer();
+                    break;
+                case int n when (n > 30 && n <= 40):
+                    healthIncrease();
+                    break;
+                case int n when (n > 40 && n <= 45):
+                    ps.BuffDamage(1.05f);
+                    StartCoroutine(setText("Damage buffed by 5 percent"));
+                    Debug.Log("Damage buffed by 5 percent");
+                    break;
+                case int n when (n > 45 && n <= 50):
+                    cc.atkSpdBuff(1.03f);
+                    StartCoroutine(setText("Attack Speed buffed by 3 percent"));
+                    Debug.Log("Attack Speed buffed by 3 percent");
+                    break;
+                default:
+                    StartCoroutine(setText("You opened a chest full of nothing :("));
+                    Debug.Log("You Opened a Chest Full of Nothing :(");
+                    break;
+            }
+            delayedDestroy(5);
+            interactable = false;
+        }
     }
 
     private void healPlayer()
@@ -73,5 +77,11 @@ public class ChestInteractable : Interactable
         this.text.enabled = true;
         yield return new WaitForSeconds(5);
         this.text.enabled = false;
+    }
+
+    private IEnumerator delayedDestroy(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(this);
     }
 }
