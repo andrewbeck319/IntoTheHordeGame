@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4edc5ef946d605642b42ae9c6b49b17c
+guid: 65999e20cee8ab64a8523e17f7ce42c0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -167,13 +167,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Walking ani_2
+      name: Attack animation_0
       rect:
         serializedVersion: 2
-        x: 69
-        y: 147
-        width: 618
-        height: 947
+        x: 56
+        y: 87
+        width: 679
+        height: 944
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,83 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 198fa83c994ca2648a980befe509e6ce
-      internalID: 751251826
+      spriteID: 4fdb89f8ce736374b8d8c5337add71d2
+      internalID: -1249962720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walking ani_3
+      name: Attack animation_2
       rect:
         serializedVersion: 2
-        x: 694
-        y: 155
-        width: 678
-        height: 947
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 745bf2f8ff95b3d4d92a3a094cbd3fc1
-      internalID: 1867885873
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walking ani_6
-      rect:
-        serializedVersion: 2
-        x: 1487
-        y: 111
-        width: 621
-        height: 975
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 171b85ba6e8109742864b6744ceb40e7
-      internalID: -566945987
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walking ani_7
-      rect:
-        serializedVersion: 2
-        x: 2155
-        y: 127
-        width: 623
-        height: 967
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b317b103237d0f6429eb6b55bb53f36d
-      internalID: 569887876
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walking ani_10
-      rect:
-        serializedVersion: 2
-        x: 2848
-        y: 117
+        x: 757
+        y: 87
         width: 639
-        height: 983
+        height: 944
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df91027aa2c6cc940871c4f77e3c2c29
-      internalID: -1457211764
+      spriteID: ea5f7a23f8f23264d9431fe2a8f94e3a
+      internalID: 1584233778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walking ani_11
+      name: Attack animation_3
       rect:
         serializedVersion: 2
-        x: 3509
-        y: 57
-        width: 512
-        height: 1037
+        x: 1439
+        y: 80
+        width: 827
+        height: 945
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cb451ba246b2a94d94d088301fc677f
-      internalID: -1743148914
+      spriteID: ec5ee0a562386c748b20cf2483f24b6d
+      internalID: -758301008
       vertices: []
       indices: 
       edges: []
@@ -295,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 852cf47fcfb350847a6478b609f56c35
+    spriteID: 41fc5d8d83982724ba71dc41e6b141cf
     internalID: 0
     vertices: []
     indices: 
@@ -303,24 +240,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Walking ani_16: -678894789
-      Walking ani_9: 515780466
-      Walking ani_15: 2061579696
-      Walking ani_6: -566945987
-      Walking ani_8: 569045265
-      Walking ani_2: 751251826
-      Walking ani_4: -645301224
-      Walking ani_11: -1743148914
-      Walking ani_17: -1112482762
-      Walking ani_7: 569887876
-      Walking ani_5: 829353398
-      Walking ani_0: -446720715
-      Walking ani_3: 1867885873
-      Walking ani_12: -141841718
-      Walking ani_1: 1038596016
-      Walking ani_14: -1023394026
-      Walking ani_13: -312685366
-      Walking ani_10: -1457211764
+      Attack animation_2: 1584233778
+      Attack animation_0: -1249962720
+      Attack animation_1: -1283599315
+      Attack animation_3: -758301008
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

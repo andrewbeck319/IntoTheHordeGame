@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6e1818cade3616043924eac37ac41d99
+guid: d1dc4c709c2595446b21dcd8915de761
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -167,64 +167,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player sprite map_1
+      name: Walking animation_0
       rect:
         serializedVersion: 2
-        x: 148
-        y: 60
-        width: 615
-        height: 944
+        x: 0
+        y: 157
+        width: 663
+        height: 945
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 928bcf59952856847bec55bcdb038b47
-      internalID: -1342823470
+      spriteID: 1055b947e2a39714ea90ce6a4098b2f0
+      internalID: -1731853615
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player sprite map_2
+      name: Walking animation_1
       rect:
         serializedVersion: 2
-        x: 850
-        y: 29
-        width: 620
-        height: 973
+        x: 745
+        y: 141
+        width: 607
+        height: 965
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95fe6aba9194a2e48937c7012d77dc6f
-      internalID: -1101520458
+      spriteID: acc3c59cdb3eecc40aa7ac113b241ece
+      internalID: 1043934340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player sprite map_3
+      name: Walking animation_4
       rect:
         serializedVersion: 2
-        x: 1538
-        y: 35
-        width: 640
-        height: 980
+        x: 1482
+        y: 95
+        width: 514
+        height: 1034
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af56387f85a2f7f4bb92a95629049598
-      internalID: -1797505129
+      spriteID: 34e8c433d33fa2d40986fff952e1cd28
+      internalID: -176859201
       vertices: []
       indices: 
       edges: []
@@ -232,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c8dc37e0396529747955e250b4abb3f6
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -240,18 +240,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player sprite map_11: -1596782558
-      Player sprite map_5: 91666933
-      Player sprite map_2: -1101520458
-      Player sprite map_13: -503780027
-      Player sprite map_3: -1797505129
-      Player sprite map_6: -766480622
-      Player sprite map_0: -952097345
-      Player sprite map_10: 1895960942
-      Player sprite map_1: -1342823470
-      Player sprite map_9: -2074840989
-      Player sprite map_8: -1646302301
-      Player sprite map_12: -1058151384
+      Walking animation_2: -1499701677
+      Walking animation_0: -1731853615
+      Walking animation_3: 1907639108
+      Walking animation_4: -176859201
+      Walking animation_1: 1043934340
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

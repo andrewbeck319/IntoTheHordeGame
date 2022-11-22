@@ -105,12 +105,14 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space))
         {
+			Animationcontroller.SetBool("Attack",true);
             characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
 		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.Space))
         {
 		Animationcontroller.SetBool("walk",false);
+		Animationcontroller.SetBool("Attack",false);
 		}
 
         if (Input.GetKeyUp(KeyCode.E))
