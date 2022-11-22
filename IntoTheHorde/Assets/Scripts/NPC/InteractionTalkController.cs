@@ -44,22 +44,22 @@ public class InteractionTalkController : MonoBehaviour
     public void Next()
     {
         int newIndex = this.currentElementIndex + 1;
-        Debug.Log("New index init = " + newIndex);
+        //Debug.Log("New index init = " + newIndex);
         while (newIndex < this.Elements.Count && !this.Elements[newIndex].AttachedToPaths.Contains(this.currentPath))
         {
-            Debug.Log("newIndex++ from " + newIndex + " to " + newIndex + 1);
+            //Debug.Log("newIndex++ from " + newIndex + " to " + newIndex + 1);
             newIndex++;
         }
 
         if (newIndex == this.Elements.Count)
         {
             // no more elements, end the talk interaction
-            Debug.Log("no more elements, end the talk interaction, index = " + newIndex + ", count = " + this.Elements.Count);
+            //Debug.Log("no more elements, end the talk interaction, index = " + newIndex + ", count = " + this.Elements.Count);
             this.StopTalk();
         }
         else
         {
-            Debug.Log("Set current element = " + newIndex);
+            //Debug.Log("Set current element = " + newIndex);
             this.currentElementIndex = newIndex;
             this.ShowCurrentElement();
         }
@@ -67,7 +67,7 @@ public class InteractionTalkController : MonoBehaviour
 
     public void ShowCurrentElement()
     {
-        Debug.Log("Show element " + this.currentElementIndex + " - " + this.Elements[this.currentElementIndex].NpcText);
+        //Debug.Log("Show element " + this.currentElementIndex + " - " + this.Elements[this.currentElementIndex].NpcText);
         // send info to GUI
         GameManager.Instance.UiManager.InteractionTalkPanelController.SetNpcText(this.Elements[this.currentElementIndex].NpcText);
 
@@ -78,23 +78,26 @@ public class InteractionTalkController : MonoBehaviour
 
     public void OnTalkResponse(InteractionElement.Response responseData)
     {
-        Debug.Log("Clicked: " + responseData.text);
+        //Debug.Log("Clicked: " + responseData.text);
         if (responseData.pathIndex == -1)
         {
             // this response does not affect paths
-            Debug.Log("Does not affect paths");
+            //Debug.Log("Does not affect paths");
             
         }
         else
         {
-            Debug.Log("New path = " + responseData.pathIndex);
+            //Debug.Log("New path = " + responseData.pathIndex);
             this.currentPath = responseData.pathIndex;
         }
 
         if (responseData.Function != null)
         {
-            // this does not work, to be fixed
             responseData.Function.Invoke();
+        }
+        else
+        {
+            Debug.Log(responseData.Function);
         }
         
         this.Next();

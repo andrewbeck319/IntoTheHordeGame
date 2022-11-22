@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathScreenController : MonoBehaviour
+public class Test : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,13 +16,8 @@ public class DeathScreenController : MonoBehaviour
         
     }
 
-    public void Show()
-    {   
-        this.gameObject.SetActive(true);
-    }
-
-    public void Hide()
+    public void TestF()
     {
-        this.gameObject.SetActive(false);
+        Debug.Log(">>> TEST");
     }
 }
