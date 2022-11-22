@@ -22,7 +22,7 @@ public class ChestInteractable : Interactable
     {
         base.Interact();
         System.Random rnd = new System.Random();
-        int rndNumber = rnd.Next(0, 101);
+        int rndNumber = rnd.Next(0, 51); // 
 
         switch(rndNumber)
         {
@@ -47,7 +47,7 @@ public class ChestInteractable : Interactable
                 Debug.Log("You Opened a Chest Full of Nothing :(");
                 break;
         }
-        text.enabled = true;
+        Destroy(this);
 
     }
 
