@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     #region Singleton
     public static EnemyManager instance;
     public EnemySpawning enemySpawning;
+    [SerializeField] private MoneyHandler moneyHandler;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class EnemyManager : MonoBehaviour
 
     public void OnEnemyDestroyed()
     {
+        moneyHandler.addGold(5);
         enemySpawning.enemyCount--;
         if (enemySpawning.spawnTime <= 0 && enemySpawning.enemyCount <= 0)
         {
