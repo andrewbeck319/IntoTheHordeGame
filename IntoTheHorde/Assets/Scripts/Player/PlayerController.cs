@@ -10,6 +10,15 @@ public class PlayerController : MonoBehaviour
     private HealthHandler healthHandler;
     private CharacterCombat characterCombat;
 
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 10f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+    [SerializeField] private TrailRenderer tr;
+    [SerializeField] private Rigidbody rb;
+
+
     public bool playerInteracted = false;
     enum FacingDirection
     {
@@ -34,6 +43,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isDashing)
+        {
+            return;
+        }
+
         this._isRunning = Input.GetKey(KeyCode.LeftShift);
         float speed = this._isRunning ? 6f : 3.5f;
 
@@ -119,6 +133,11 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(PlayerInteract());
         }
+
+        if(Input.GetKeyDown(KeyCode.S) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
     public void TakeDamage(CharacterStats stats)
     {
@@ -134,5 +153,20 @@ public class PlayerController : MonoBehaviour
         playerInteracted = true;
         yield return new WaitForSeconds(1);
         playerInteracted = false;
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        rb.useGravity = false;
+        rb.velocity = -transform.right * dashingPower;
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        rb.useGravity = true;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
