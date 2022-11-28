@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     NavMeshAgent agent;
 
     private float stoppingDistance;
+    public float counterSpeedMult = 1.5f;
+    private float thpeed;
     enum FacingDirection
     {
         Left,
@@ -40,6 +42,7 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         stoppingDistance = agent.stoppingDistance;
+        thpeed = agent.speed;
 
         healthHandler.healthSystem.SetMaxHealth(enemyStats.maxHealth);
         healthHandler.healthSystem.SetHealthPercent(100);
@@ -67,11 +70,17 @@ public class Enemy : MonoBehaviour
                 Vector3 attackPosition = FindAttackPosition();
                 if (Vector3.Distance(transform.position, attackPosition) >= EPSILON)
                 {
+                    //another temporary fix, the player can just become invincible if they keep spinning, because the enemy can never get into
+                    //attack position quick enough. real solution is use player rotational velocity, use that to find equivalent translational velocity for
+                    //the enemy at the radius of stoppingDistance, and then bump up that translational velocity to something above 1.0f so it will always remain "ahead" of any player rotation
+                    //temporary is just making speed number big lol
+                    agent.speed = thpeed * counterSpeedMult;
                     agent.SetDestination(attackPosition);
                     agent.stoppingDistance = 0.0f;
                 }
                 else
-                {
+                {  //reset
+                    agent.speed = thpeed;
                     agent.stoppingDistance = stoppingDistance;
                 }
                 characterCombat.Attack();
