@@ -8,6 +8,7 @@ public class ChestInteractable : Interactable
     private HealthSystem hs;
     private PlayerStats ps;
     private CharacterCombat cc;
+    private MoneyHandler mh;
     private bool interactable = true;
     [SerializeField] private TMP_Text text;
 
@@ -17,12 +18,14 @@ public class ChestInteractable : Interactable
         hs = hh.healthSystem;
         ps = player.gameObject.GetComponent<PlayerStats>();
         cc = player.gameObject.GetComponent<CharacterCombat>();
+        mh = FindObjectOfType<MoneyHandler>();
     }
 
     public override void Interact()
     {
-        if(interactable)
+        if(interactable && mh.gold >= 15)
         {
+            mh.addGold(-15);
             base.Interact();
             System.Random rnd = new System.Random();
             int rndNumber = rnd.Next(0, 51); // 
@@ -55,6 +58,10 @@ public class ChestInteractable : Interactable
             }
             delayedDestroy(5);
             interactable = false;
+        }
+        else if(mh.gold < 15)
+        {
+            StartCoroutine(setText("You need at least 15 gold to open this chest"));
         }
     }
 
