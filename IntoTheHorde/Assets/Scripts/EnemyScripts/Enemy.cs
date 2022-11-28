@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     Transform mainCamera;
     NavMeshAgent agent;
 
+    private float stoppingDistance;
     enum FacingDirection
     {
         Left,
@@ -35,8 +36,10 @@ public class Enemy : MonoBehaviour
         characterCombat = GetComponent<CharacterCombat>();
 
         mainCamera = PlayerManager.instance.mainCamera.transform;
-        target = PlayerManager.instance.player.transform;
+        target = PlayerManager.instance.player.GetComponent<BoxCollider>().transform;
         agent = GetComponent<NavMeshAgent>();
+
+        stoppingDistance = agent.stoppingDistance;
 
         healthHandler.healthSystem.SetMaxHealth(enemyStats.maxHealth);
         healthHandler.healthSystem.SetHealthPercent(100);
@@ -52,9 +55,25 @@ public class Enemy : MonoBehaviour
         if(distance <= lookRadius)
         {
             agent.SetDestination(target.position);
-            
-            if(distance <= agent.stoppingDistance)
+
+            if (distance <= stoppingDistance)
             {
+                //there's a bug where once an enemy is within stopping distance,
+                //the player can rotate and get the enenmy to stop hitting them,
+                //the fix is to get them to re-route to either the front or back of the player
+                //by finding the attack position and temporarily disabling stopping distance until they're there.
+
+                float EPSILON = 0.1f;
+                Vector3 attackPosition = FindAttackPosition();
+                if (Vector3.Distance(transform.position, attackPosition) >= EPSILON)
+                {
+                    agent.SetDestination(attackPosition);
+                    agent.stoppingDistance = 0.0f;
+                }
+                else
+                {
+                    agent.stoppingDistance = stoppingDistance;
+                }
                 characterCombat.Attack();
             }
         }
@@ -89,10 +108,16 @@ public class Enemy : MonoBehaviour
         lastFacingDirection = facingDirection;
     }
 
+    private Vector3 FindAttackPosition()
+    {
+        return target.position + target.transform.right.normalized * stoppingDistance * ((facingDirection == FacingDirection.Left) ? 1.0f:-1.0f);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+        //Gizmos.color = Color.cyan;
+        //Gizmos.DrawWireSphere(FindAttackPosition(), 2.0f);
         //Gizmos.color = Color.blue;
         //Vector3 mainCameraNormalized = mainCamera.position;
         //mainCameraNormalized.y = target.position.y;

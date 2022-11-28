@@ -18333,6 +18333,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7475940574382644455, guid: 630f097dddbcd8b48a314d13183dfe64,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 630f097dddbcd8b48a314d13183dfe64, type: 3}
@@ -37519,6 +37524,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 9.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673336093325500863, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4673336093325500863, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
         type: 3}
