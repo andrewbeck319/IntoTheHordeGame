@@ -45,6 +45,9 @@ public class ChestInteractable : Interactable
                     StartCoroutine(setText("Attack Speed buffed by 3 percent"));
                     Debug.Log("Attack Speed buffed by 3 percent");
                     break;
+                case int n when (n > 50 && n <= 55):
+                    dashDistanceIncrease();
+                    break;
                 default:
                     StartCoroutine(setText("You opened a chest full of nothing :("));
                     Debug.Log("You Opened a Chest Full of Nothing :(");
@@ -83,5 +86,12 @@ public class ChestInteractable : Interactable
     {
         yield return new WaitForSeconds(seconds);
         Destroy(this);
+    }
+
+    private void dashDistanceIncrease()
+    {
+        PlayerController pc = player.gameObject.GetComponent<PlayerController>();
+        pc.dashingPower = pc.dashingPower * 0.05f;
+        StartCoroutine(setText("Dashing range increased by 5 percent"));
     }
 }
