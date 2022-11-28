@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class MoneyHandler : MonoBehaviour
 {
-    [SerializeField] private int gold;
+    [SerializeField] public int gold { get; set; }
     [SerializeField] private TMP_Text text;
 
     // Start is called before the first frame update
