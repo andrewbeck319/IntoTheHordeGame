@@ -8,6 +8,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+	[SerializeField] private Animator Animationcontroller;
     public float lookRadius = 10f;
     private EnemyManager enemyManager;
     private EnemyStats enemyStats;
@@ -83,6 +84,7 @@ public class Enemy : MonoBehaviour
                     agent.speed = thpeed;
                     agent.stoppingDistance = stoppingDistance;
                 }
+				Animationcontroller.SetBool("attack",true);
                 characterCombat.Attack();
             }
         }

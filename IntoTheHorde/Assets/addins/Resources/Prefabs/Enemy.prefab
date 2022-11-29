@@ -41,7 +41,7 @@ Transform:
   - {fileID: 8634682588118951794}
   - {fileID: 1276122849764907136}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 57.5, z: 0}
 --- !u!54 &6780379963723323603
 Rigidbody:
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39023cadb4469464bbd3246f45378f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animationcontroller: {fileID: 3006692714801953282}
   lookRadius: 10
   counterSpeedMult: 1.5
 --- !u!114 &6780379963723323611
@@ -703,6 +704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1276122849764907136}
   - component: {fileID: 1805288974994901291}
+  - component: {fileID: 3006692714801953282}
   m_Layer: 0
   m_Name: Enemy sprite
   m_TagString: Untagged
@@ -766,7 +768,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7ba4b26efa9971b48822309f7817f648, type: 3}
+  m_Sprite: {fileID: -654537565, guid: 6af43383b3b56b748a9b30781338b4e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -777,3 +779,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3006692714801953282
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464241299396166317}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c026b50139eaa148a0424ceef07086f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
