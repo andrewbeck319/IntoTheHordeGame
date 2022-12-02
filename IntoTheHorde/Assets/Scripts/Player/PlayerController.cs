@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
         if (playerStats.NeedsToDie())
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
             PlayerManager.instance.KillPlayer();
         }//skill issue
     }
