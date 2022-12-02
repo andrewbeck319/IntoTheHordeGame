@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public UiManager UiManager;
     public PlayerManager playerManager;
+    public StatsController StatsController;
 
     void Awake()
     {

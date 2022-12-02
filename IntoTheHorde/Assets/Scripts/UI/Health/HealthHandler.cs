@@ -1,4 +1,6 @@
 // HealthHandler script is meant to be used to handle all our different systems within one place
+
+using System;
 using UnityEngine;
 
 public class HealthHandler : MonoBehaviour
@@ -13,8 +15,5 @@ public class HealthHandler : MonoBehaviour
         
         // Setup the health bar for this health system
         healthBar.SetUp(healthSystem);
-
-
     }
-
 }

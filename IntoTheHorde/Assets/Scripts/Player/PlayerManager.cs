@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject mainCamera;
     public void KillPlayer()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.UiManager.DeathScreenController.Show();
     }
 }
