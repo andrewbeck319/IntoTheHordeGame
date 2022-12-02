@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
 			Animationcontroller.SetBool("walk",true);
-            // this.GetComponent<Rigidbody>().AddForce(-transform.right);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
 
             //spriteRenderer.flipX = false; gotta flip the whole gameobject
@@ -77,7 +76,6 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKey(KeyCode.RightArrow))
         {
 			Animationcontroller.SetBool("walk",true);
-            // this.GetComponent<Rigidbody>().AddForce(transform.right);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
             //spriteRenderer.flipX = true; gotta flip the whole gameobject
 
@@ -95,17 +93,15 @@ public class PlayerController : MonoBehaviour
             facingDirection = FacingDirection.Right;
         }
         
-        // test
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            // this.GetComponent<Rigidbody>().AddForce(-transform.right);
-            this.transform.Translate(Vector3.up * speed * Time.deltaTime);
+            Animationcontroller.SetBool("walk",true);
+            this.transform.Translate(-Vector3.forward * speed * Time.deltaTime);
         } else if (Input.GetKey(KeyCode.DownArrow))
         {
-            // this.GetComponent<Rigidbody>().AddForce(transform.right);
-            this.transform.Translate(-Vector3.up * speed * Time.deltaTime);
+            Animationcontroller.SetBool("walk",true);
+            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
-        // end of test
 
         if (Input.GetKey(KeyCode.A))
         {
@@ -123,10 +119,10 @@ public class PlayerController : MonoBehaviour
             characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
-		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.Space))
         {
-		Animationcontroller.SetBool("walk",false);
-		Animationcontroller.SetBool("Attack",false);
+		    Animationcontroller.SetBool("walk",false);
+		    Animationcontroller.SetBool("Attack",false);
 		}
 
         if (Input.GetKeyUp(KeyCode.E))
