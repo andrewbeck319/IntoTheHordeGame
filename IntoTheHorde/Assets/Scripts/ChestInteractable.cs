@@ -10,6 +10,7 @@ public class ChestInteractable : Interactable
     private CharacterCombat cc;
     private MoneyHandler mh;
     private bool interactable = true;
+    private static int chestCost = 15;
     [SerializeField] private TMP_Text text;
 
     public void Start()
@@ -24,7 +25,7 @@ public class ChestInteractable : Interactable
 
     public override void Interact()
     {
-        if(interactable && mh.gold >= 15)
+        if(interactable && mh.gold >= chestCost)
         {
             mh.addGold(-15);
             base.Interact();
@@ -57,12 +58,13 @@ public class ChestInteractable : Interactable
                     Debug.Log("You Opened a Chest Full of Nothing :(");
                     break;
             }
+            chestCost += 5;
             StartCoroutine(delayedDestroy(1));
             interactable = false;
         }
-        else if(mh.gold < 15)
+        else if(mh.gold < chestCost)
         {
-            StartCoroutine(setText("You need at least 15 gold to open this chest"));
+            StartCoroutine(setText("You need at least" + chestCost +  " gold to open this chest"));
         }
     }
 
