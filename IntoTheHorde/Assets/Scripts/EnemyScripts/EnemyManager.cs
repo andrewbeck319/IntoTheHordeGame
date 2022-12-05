@@ -26,6 +26,7 @@ public class EnemyManager : MonoBehaviour
         if (enemySpawning.spawnTime <= 0 && enemySpawning.enemyCount <= 0)
         {
             enemySpawning.spawnerDone = true;
+            enemySpawning.waitTime = 15f;
         }
     }
 
