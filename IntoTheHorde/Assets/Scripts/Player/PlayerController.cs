@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
 			Animationcontroller.SetBool("Attack",true);
+            FindObjectOfType<AudioManager>().Play("PlayerAttackSwing");
             characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
@@ -132,6 +133,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.S) && canDash)
         {
+            FindObjectOfType<AudioManager>().Play("PlayerAttackSwing");
             StartCoroutine(Dash());
         }
     }
