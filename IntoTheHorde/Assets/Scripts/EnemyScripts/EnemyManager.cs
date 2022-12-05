@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
         {
             enemySpawning.spawnerDone = true;
             enemySpawning.waitTime = 15f;
+            enemySpawning.SpawnChest();
         }
     }
 

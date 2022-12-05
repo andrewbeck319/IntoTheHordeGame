@@ -14,6 +14,7 @@ public class ChestInteractable : Interactable
 
     public void Start()
     {
+        player = GameObject.Find("Player").transform;
         hh = player.gameObject.GetComponent<HealthHandler>();
         hs = hh.healthSystem;
         ps = player.gameObject.GetComponent<PlayerStats>();
@@ -56,7 +57,7 @@ public class ChestInteractable : Interactable
                     Debug.Log("You Opened a Chest Full of Nothing :(");
                     break;
             }
-            delayedDestroy(5);
+            StartCoroutine(delayedDestroy(1));
             interactable = false;
         }
         else if(mh.gold < 15)
@@ -92,7 +93,7 @@ public class ChestInteractable : Interactable
     private IEnumerator delayedDestroy(int seconds)
     {
         yield return new WaitForSeconds(seconds);
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     private void dashDistanceIncrease()

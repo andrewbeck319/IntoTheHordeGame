@@ -17,10 +17,11 @@ public class EnemySpawning : MonoBehaviour
     public int enemyCount = 0;
     public bool spawnerDone;
     public GameObject player;
+    public GameObject chest;
 
     private void Start()
     {
-        Invoke("SpawnEnemy", 0.5f);
+        Invoke("SpawnEnemy", 8f);
     }
 
     private void Update()
@@ -89,5 +90,10 @@ public class EnemySpawning : MonoBehaviour
             }
         }
         return tMin;
+    }
+
+    public void SpawnChest()
+    {
+        Instantiate(chest, player.transform.position, Quaternion.identity);
     }
 }
