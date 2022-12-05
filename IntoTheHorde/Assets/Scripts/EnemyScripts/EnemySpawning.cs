@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawning : MonoBehaviour
 {
     public Transform[] spawnPoints;
+    public GameObject spawnPointContainer;
     //public GameObject currentPoint;
     public int index;
 
@@ -21,6 +23,8 @@ public class EnemySpawning : MonoBehaviour
 
     private void Start()
     {
+        spawnPoints = spawnPointContainer.transform.GetComponentsInChildren<Transform>().Skip(1).ToArray();
+
         Invoke("SpawnEnemy", 8f);
     }
 
@@ -96,4 +100,5 @@ public class EnemySpawning : MonoBehaviour
     {
         Instantiate(chest, player.transform.position, Quaternion.identity);
     }
+
 }
