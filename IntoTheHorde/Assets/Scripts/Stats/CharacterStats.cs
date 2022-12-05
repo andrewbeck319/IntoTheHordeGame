@@ -9,12 +9,15 @@ public class CharacterStats : MonoBehaviour {
 	public int currentHealth { get; private set; }
 
 	public Stat damage;
+	public Stat shield;
+	public Stat shieldRegenRate;
+	public Stat shieldRegenDelay;
 	public Stat armor;
 
 	private bool shouldDie = false;
-	// Set current health to max health
-	// when starting the game.
-	void Awake ()
+    // Set current health to max health
+    // when starting the game.
+    void Awake ()
 	{
 		currentHealth = maxHealth;
 	}
@@ -22,6 +25,7 @@ public class CharacterStats : MonoBehaviour {
 	// Damage the character
 	public int TakeDamage (int damage)
 	{
+
 		// Subtract the armor value
 		damage -= armor.GetValue();
 		damage = Mathf.Clamp(damage, 0, int.MaxValue);

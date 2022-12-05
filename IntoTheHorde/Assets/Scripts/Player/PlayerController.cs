@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Animator Animationcontroller; 
     private bool _isRunning = false;
 
-    private PlayerStats playerStats; 
+    private PlayerStats playerStats;
+    private ShieldHandler shieldHandler;
     private HealthHandler healthHandler;
     private CharacterCombat characterCombat;
 
@@ -17,7 +18,8 @@ public class PlayerController : MonoBehaviour
     private float dashingCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private Rigidbody rb;
-
+    private float regenDelay;
+    private float regenAccum = 0.0f;
 
     public bool playerInteracted = false;
     enum FacingDirection
@@ -33,16 +35,41 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerStats = GetComponent<PlayerStats>();
+        shieldHandler = GetComponent<ShieldHandler>();
         healthHandler = GetComponent<HealthHandler>();
         characterCombat = GetComponent<CharacterCombat>();
 
         healthHandler.healthSystem.SetMaxHealth(playerStats.maxHealth);
         healthHandler.healthSystem.SetHealthPercent(100);
+
+        shieldHandler.shieldSystem.SetMaxShield(playerStats.shield.GetValue());
+        shieldHandler.shieldSystem.SetShieldPercent(100);
     }
 
     // Update is called once per frame
     void Update()
     {
+        regenDelay -= Time.deltaTime;
+
+       
+        if (regenDelay <= 0)
+        {
+            if(shieldHandler.shieldSystem.GetShield() < shieldHandler.shieldSystem.GetMaxShield())
+            {
+                //do regen
+                regenAccum += playerStats.shieldRegenRate.GetValue() * Time.deltaTime;
+                if (regenAccum >= 1.0f)
+                {
+                    shieldHandler.shieldSystem.Regen((int)regenAccum);
+                    regenAccum = 0.0f;
+                }
+            }
+            else
+            {
+                regenAccum = 0.0f;
+            }
+        }
+        
         if(isDashing)
         {
             return;
@@ -58,19 +85,23 @@ public class PlayerController : MonoBehaviour
 
             //spriteRenderer.flipX = false; gotta flip the whole gameobject
             //Quaternion lookRotation = Quaternion.LookRotation(new Vector3(0, 180,0));
-            if(facingDirection != FacingDirection.Left) //then we gotta rotate the gameobject, and since the camera is a child, reset its rotation manually
+
+
+            if (facingDirection != FacingDirection.Left) //then we gotta rotate the gameobject, and since the camera is a child, reset its rotation manually
             {
                 //cam before
-                Transform camGet = this.transform.GetChild(3);
+                Transform camGet = this.transform.GetChild(4);
                 Vector3 camPos = camGet.position;
                 Quaternion camRot = camGet.rotation;
 
                 transform.RotateAround(transform.position, transform.up, 180f);
 
                 //cam after
-                this.transform.GetChild(3).position = camPos;
-                this.transform.GetChild(3).rotation = camRot;
+                this.transform.GetChild(4).position = camPos;
+                this.transform.GetChild(4).rotation = camRot;
             }
+
+
             facingDirection = FacingDirection.Left;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
@@ -79,28 +110,30 @@ public class PlayerController : MonoBehaviour
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
             //spriteRenderer.flipX = true; gotta flip the whole gameobject
 
-            if(facingDirection != FacingDirection.Right)
+
+            if (facingDirection != FacingDirection.Right)
             {
-                Transform camGet = this.transform.GetChild(3);
+                Transform camGet = this.transform.GetChild(4);
                 Vector3 camPos = camGet.position;
                 Quaternion camRot = camGet.rotation;
 
                 transform.RotateAround(transform.position, transform.up, -180f);
-                this.transform.GetChild(3).position = camPos;
-                this.transform.GetChild(3).rotation = camRot;
+                this.transform.GetChild(4).position = camPos;
+                this.transform.GetChild(4).rotation = camRot;
 
             }
+
             facingDirection = FacingDirection.Right;
         }
         
         if (Input.GetKey(KeyCode.UpArrow))
         {
             Animationcontroller.SetBool("walk",true);
-            this.transform.Translate(-Vector3.forward * speed * Time.deltaTime);
+            this.transform.Translate((facingDirection == FacingDirection.Right) ? -Vector3.forward * speed * Time.deltaTime : Vector3.forward * speed * Time.deltaTime);
         } else if (Input.GetKey(KeyCode.DownArrow))
         {
             Animationcontroller.SetBool("walk",true);
-            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            this.transform.Translate((facingDirection == FacingDirection.Right) ? Vector3.forward * speed * Time.deltaTime : -Vector3.forward * speed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -148,15 +181,21 @@ public class PlayerController : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("PlayerAttackSwing");
             StartCoroutine(Dash());
         }
+
     }
     public void TakeDamage(CharacterStats stats)
     {
-        healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
-        if (playerStats.NeedsToDie())
+        shieldHandler.shieldSystem.Damage(stats.damage.GetValue());
+        if (shieldHandler.shieldSystem.GetShield() == 0)
         {
-            //Destroy(gameObject);
-            PlayerManager.instance.KillPlayer();
-        }//skill issue
+            healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
+            if (playerStats.NeedsToDie())
+            {
+                //Destroy(gameObject);
+                PlayerManager.instance.KillPlayer();
+            }//skill issue
+        }
+        regenDelay = playerStats.shieldRegenDelay.GetValue();
     }
     private IEnumerator PlayerInteract()
     {
