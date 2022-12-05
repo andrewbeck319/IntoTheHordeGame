@@ -64,7 +64,7 @@ public class ChestInteractable : Interactable
         }
         else if(mh.gold < chestCost)
         {
-            StartCoroutine(setText("You need at least" + chestCost +  " gold to open this chest"));
+            StartCoroutine(setText("You need at least " + chestCost +  " gold to open this chest"));
         }
     }
 

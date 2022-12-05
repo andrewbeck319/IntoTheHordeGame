@@ -46,6 +46,7 @@ public class EnemySpawning : MonoBehaviour
                 spawnerDone = false;
                 spawnTime = 15f;
                 canSpawn = true;
+                Invoke("SpawnEnemy", 0.5f);
             }
         }
     }
