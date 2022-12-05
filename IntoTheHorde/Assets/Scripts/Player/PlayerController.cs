@@ -116,7 +116,19 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
 			Animationcontroller.SetBool("Attack",true);
-            FindObjectOfType<AudioManager>().Play("PlayerAttackSwing");
+            float randNum = Random.Range(0,3);
+            Debug.Log(randNum);
+            if(randNum == 0)
+            {
+                FindObjectOfType<AudioManager>().Play("PlayerAttackSwing1");
+            }
+            else if (randNum == 1)
+            {
+                FindObjectOfType<AudioManager>().Play("PlayerAttackSwing2");
+            }
+            else if (randNum == 2){
+                FindObjectOfType<AudioManager>().Play("PlayerAttackSwing3");
+            }
             characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
