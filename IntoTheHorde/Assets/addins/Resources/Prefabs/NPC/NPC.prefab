@@ -119,44 +119,47 @@ MonoBehaviour:
     Responses:
     - text: Hello!
       pathIndex: 0
+      Function:
+        m_PersistentCalls:
+          m_Calls: []
     AttachedToPaths: 00000000
-    Function:
-      m_PersistentCalls:
-        m_Calls: []
   - NpcText: What are you doing here?
     Responses:
     - text: Nothing!
       pathIndex: 0
+      Function:
+        m_PersistentCalls:
+          m_Calls: []
     AttachedToPaths: 00000000
-    Function:
-      m_PersistentCalls:
-        m_Calls: []
   - NpcText: Do you know where you are going?
     Responses:
     - text: Yes
       pathIndex: 1
+      Function:
+        m_PersistentCalls:
+          m_Calls: []
     - text: No
       pathIndex: 0
+      Function:
+        m_PersistentCalls:
+          m_Calls: []
     AttachedToPaths: 00000000
-    Function:
-      m_PersistentCalls:
-        m_Calls: []
   - NpcText: Okay, be safe!
     Responses:
     - text: Thank you
       pathIndex: 1
+      Function:
+        m_PersistentCalls:
+          m_Calls: []
     AttachedToPaths: 01000000
-    Function:
-      m_PersistentCalls:
-        m_Calls: []
   - NpcText: Go straight then, it's the safest way.
     Responses:
     - text: Thank you for this!
       pathIndex: 0
+      Function:
+        m_PersistentCalls:
+          m_Calls: []
     AttachedToPaths: 00000000
-    Function:
-      m_PersistentCalls:
-        m_Calls: []
   currentElementIndex: -1
   currentPath: 0
   isActive: 0
