@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
     public EnemySpawning enemySpawning;
     [SerializeField] private MoneyHandler moneyHandler;
-
+    [SerializeField] private TMP_Text enemyCountText;
     private void Start()
     {
         enemySpawning = GetComponent<EnemySpawning>();
@@ -26,12 +27,14 @@ public class EnemyManager : MonoBehaviour
         if (enemySpawning.spawnTime <= 0 && enemySpawning.enemyCount <= 0)
         {
             enemySpawning.spawnerDone = true;
+            enemySpawning.waitTime = 15f;
+            enemySpawning.SpawnChest();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        enemyCountText.SetText("Enemies: " + enemySpawning.enemyCount);
     }
 }
