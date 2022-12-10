@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
 	[SerializeField] private Animator Animationcontroller;
-    public float lookRadius = 10f;
+    //public float lookRadius = 10f;
     private EnemyManager enemyManager;
     private EnemyStats enemyStats;
     private HealthHandler healthHandler;
@@ -19,9 +19,11 @@ public class Enemy : MonoBehaviour
     Transform mainCamera;
     NavMeshAgent agent;
 
+    Vector3 targetGroundPos;
     private float stoppingDistance;
     public float counterSpeedMult = 1.5f;
     private float thpeed;
+
     enum FacingDirection
     {
         Left,
@@ -52,41 +54,48 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+
         FaceCamera();
         FaceTarget();
+        UpdateTargetGroundPos();
 
-        float distance = Vector3.Distance(target.position, transform.position);
-        if(distance <= lookRadius)
+        float distance = ((target.position.x - transform.position.x) * (target.position.x - transform.position.x))
+            + ((target.position.z - transform.position.z) * (target.position.z - transform.position.z));
+
+        agent.SetDestination(targetGroundPos);
+
+        if (distance <= stoppingDistance)
         {
-            agent.SetDestination(target.position);
+            //there's a bug where once an enemy is within stopping distance,
+            //the player can rotate and get the enenmy to stop hitting them,
+            //the fix is to get them to re-route to either the front or back of the player
+            //by finding the attack position and temporarily disabling stopping distance until they're there.
 
-            if (distance <= stoppingDistance)
+            float EPSILON = 0.1f;
+            Vector3 attackPosition = FindAttackPosition();
+            distance = ((attackPosition.x - transform.position.x) * (attackPosition.x - transform.position.x))
+            + ((attackPosition.z - transform.position.z) * (attackPosition.z - transform.position.z));
+
+            //if (Vector3.Distance(transform.position, attackPosition) >= EPSILON)
+            if (distance >= EPSILON)
             {
-                //there's a bug where once an enemy is within stopping distance,
-                //the player can rotate and get the enenmy to stop hitting them,
-                //the fix is to get them to re-route to either the front or back of the player
-                //by finding the attack position and temporarily disabling stopping distance until they're there.
+                //another temporary fix, the player can just become invincible if they keep spinning, because the enemy can never get into
+                //attack position quick enough. real solution is use player rotational velocity, use that to find equivalent translational velocity for
+                //the enemy at the radius of stoppingDistance, and then bump up that translational velocity to something above 1.0f so it will always remain "ahead" of any player rotation
+                //temporary is just making speed number big lol
 
-                float EPSILON = 0.1f;
-                Vector3 attackPosition = FindAttackPosition();
-                if (Vector3.Distance(transform.position, attackPosition) >= EPSILON)
-                {
-                    //another temporary fix, the player can just become invincible if they keep spinning, because the enemy can never get into
-                    //attack position quick enough. real solution is use player rotational velocity, use that to find equivalent translational velocity for
-                    //the enemy at the radius of stoppingDistance, and then bump up that translational velocity to something above 1.0f so it will always remain "ahead" of any player rotation
-                    //temporary is just making speed number big lol
-                    agent.speed = thpeed * counterSpeedMult;
-                    agent.SetDestination(attackPosition);
-                    agent.stoppingDistance = 0.0f;
-                }
-                else
-                {  //reset
-                    agent.speed = thpeed;
-                    agent.stoppingDistance = stoppingDistance;
-                }
-				Animationcontroller.SetBool("attack",true);
-                characterCombat.Attack();
+
+                agent.speed = thpeed * counterSpeedMult;
+                agent.SetDestination(attackPosition);
+                agent.stoppingDistance = 0.0f;
             }
+            else
+            {  //reset
+                agent.speed = thpeed;
+                agent.stoppingDistance = stoppingDistance;
+            }
+		Animationcontroller.SetBool("attack",true);
+            characterCombat.Attack();
         }
 
     }
@@ -123,10 +132,14 @@ public class Enemy : MonoBehaviour
     {
         return target.position + target.transform.right.normalized * stoppingDistance * ((facingDirection == FacingDirection.Left) ? 1.0f:-1.0f);
     }
+    private void UpdateTargetGroundPos()
+    {
+        RaycastHit hit;
+        float distance = 150.0f;
+        if(Physics.Raycast(target.position, Vector3.down, out hit, distance)) targetGroundPos = hit.point;
+    }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, lookRadius);
         //Gizmos.color = Color.cyan;
         //Gizmos.DrawWireSphere(FindAttackPosition(), 2.0f);
         //Gizmos.color = Color.blue;
