@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PlayerInteract());
         }
 
-        if(Input.GetKeyDown(KeyCode.S) && canDash)
+        if(Input.GetKeyDown(KeyCode.Alpha1) && canDash)
         {
             audioManager.Play("PlayerAttackSwing");
             StartCoroutine(Dash());
