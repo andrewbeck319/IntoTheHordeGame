@@ -10,9 +10,14 @@ public class CharacterStats : MonoBehaviour {
 
 	public Stat damage;
 	public Stat shield;
+	public Stat armor;
+
 	public Stat shieldRegenRate;
 	public Stat shieldRegenDelay;
-	public Stat armor;
+
+	public Stat leapMaxCount;
+	public Stat leapRegenRate;
+	public Stat leapHeight;
 
 	private bool shouldDie = false;
     // Set current health to max health

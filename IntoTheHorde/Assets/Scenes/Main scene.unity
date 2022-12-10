@@ -52646,6 +52646,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.38
       objectReference: {fileID: 0}
+    - target: {fileID: 7151420004471618452, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
+        type: 3}
+      propertyPath: leap.baseValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151420004471618452, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
+        type: 3}
+      propertyPath: leapHeight.baseValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151420004471618452, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
+        type: 3}
+      propertyPath: leapMaxCount.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151420004471618452, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
+        type: 3}
+      propertyPath: leapRegenRate.baseValue
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7483450271402937681, guid: 0ffce0020cfde4467874b9d6bb3f73bf,
         type: 3}
       propertyPath: m_Name

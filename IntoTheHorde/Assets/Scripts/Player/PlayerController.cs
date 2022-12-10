@@ -10,14 +10,26 @@ public class PlayerController : MonoBehaviour
     private ShieldHandler shieldHandler;
     private HealthHandler healthHandler;
     private CharacterCombat characterCombat;
+    private AudioManager audioManager;
 
+
+    //Ability shit==================
+
+    //Dash
     private bool canDash = true;
     private bool isDashing;
+    //could maybe make these stats in character stats
     public float dashingPower = 10f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private Rigidbody rb;
+
+    //Leap
+    private int leapCount = 0;
+    private float leapRegenDelay = 0.0f;
+
+    //shield shit
     private float regenDelay;
     private float regenAccum = 0.0f;
 
@@ -44,13 +56,16 @@ public class PlayerController : MonoBehaviour
 
         shieldHandler.shieldSystem.SetMaxShield(playerStats.shield.GetValue());
         shieldHandler.shieldSystem.SetShieldPercent(100);
+
+        audioManager = FindObjectOfType<AudioManager>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         regenDelay -= Time.deltaTime;
-
+        leapRegenDelay -= Time.deltaTime;
        
         if (regenDelay <= 0)
         {
@@ -69,8 +84,14 @@ public class PlayerController : MonoBehaviour
                 regenAccum = 0.0f;
             }
         }
-        
-        if(isDashing)
+
+        if (leapRegenDelay <= 0)
+        {
+            leapCount--;
+            if (leapCount < 0) leapCount = 0;
+        }
+
+        if (isDashing)
         {
             return;
         }
@@ -153,14 +174,14 @@ public class PlayerController : MonoBehaviour
             Debug.Log(randNum);
             if(randNum == 0)
             {
-                FindObjectOfType<AudioManager>().Play("PlayerAttackSwing1");
+                audioManager.Play("PlayerAttackSwing1");
             }
             else if (randNum == 1)
             {
-                FindObjectOfType<AudioManager>().Play("PlayerAttackSwing2");
+                audioManager.Play("PlayerAttackSwing2");
             }
             else if (randNum == 2){
-                FindObjectOfType<AudioManager>().Play("PlayerAttackSwing3");
+                audioManager.Play("PlayerAttackSwing3");
             }
             characterCombat.Attack();
         }
@@ -178,8 +199,16 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.S) && canDash)
         {
-            FindObjectOfType<AudioManager>().Play("PlayerAttackSwing");
+            audioManager.Play("PlayerAttackSwing");
             StartCoroutine(Dash());
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2) && leapCount != playerStats.leapMaxCount.GetValue())
+        {
+            Vector3 forceVec = new Vector3(0.0f, 0.5f * playerStats.leapHeight.GetValue(), 0.0f );
+            rb.AddForce(forceVec, ForceMode.Impulse);
+            leapRegenDelay = playerStats.leapRegenRate.GetValue();
+            leapCount++;
         }
 
     }

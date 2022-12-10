@@ -76,7 +76,6 @@ public class Enemy : MonoBehaviour
             distance = ((attackPosition.x - transform.position.x) * (attackPosition.x - transform.position.x))
             + ((attackPosition.z - transform.position.z) * (attackPosition.z - transform.position.z));
 
-            //if (Vector3.Distance(transform.position, attackPosition) >= EPSILON)
             if (distance >= EPSILON)
             {
                 //another temporary fix, the player can just become invincible if they keep spinning, because the enemy can never get into
