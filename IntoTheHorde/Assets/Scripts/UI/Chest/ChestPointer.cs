@@ -37,12 +37,10 @@ public class ChestPointer : MonoBehaviour
         chestPosition.y = playerPosition.y;
         Vector3 directionVector = (chestPosition - playerPosition).normalized;
 
+        //could flip the positionss of both vectors so we can avoid the -angleFromCam
         float angleFromCam = Vector3.SignedAngle(originVector, directionVector, Vector3.up);
 
-        Debug.Log(angleFromCam);
-        if (angleFromCam > 0.0f) angleFromCam = -angleFromCam;
-        else angleFromCam = -angleFromCam;
-        pointerRectTransform.localEulerAngles = new Vector3(0, 0, angleFromCam);
+        pointerRectTransform.localEulerAngles = new Vector3(0, 0, -angleFromCam);
 
 
 

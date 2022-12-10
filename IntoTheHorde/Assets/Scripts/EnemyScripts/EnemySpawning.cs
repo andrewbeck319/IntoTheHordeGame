@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class EnemySpawning : MonoBehaviour
@@ -20,11 +21,10 @@ public class EnemySpawning : MonoBehaviour
     public bool spawnerDone;
     public GameObject player;
     public GameObject chest;
-
+    public GameObject ChestPointers;
     private void Start()
     {
         spawnPoints = spawnPointContainer.transform.GetComponentsInChildren<Transform>().Skip(1).ToArray();
-
         Invoke("SpawnEnemy", 8f);
     }
 
@@ -99,7 +99,12 @@ public class EnemySpawning : MonoBehaviour
 
     public void SpawnChest()
     {
-        Instantiate(chest, player.transform.position, Quaternion.identity);
+        GameObject newChest = Instantiate(chest, player.transform.position, Quaternion.identity);
+        GameObject pointerBase = ChestPointers.transform.Find("PointerBase").gameObject;
+        GameObject newChestPointer = Instantiate(pointerBase, ChestPointers.transform);
+        newChestPointer.GetComponent<ChestPointer>().chest = newChest;
+        newChestPointer.GetComponent<ChestPointer>().camera = player.transform.GetChild(4).gameObject;
+        newChestPointer.SetActive(true);
     }
 
 }
