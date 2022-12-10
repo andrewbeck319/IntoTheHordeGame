@@ -58,7 +58,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 14
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &6780379963723323601
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animationcontroller: {fileID: 3006692714801953282}
-  lookRadius: 10
   counterSpeedMult: 1.5
 --- !u!114 &6780379963723323611
 MonoBehaviour:
@@ -136,7 +135,11 @@ MonoBehaviour:
     baseValue: 0
   shieldRegenDelay:
     baseValue: 0
-  leap:
+  leapMaxCount:
+    baseValue: 0
+  leapRegenRate:
+    baseValue: 0
+  leapHeight:
     baseValue: 0
 --- !u!195 &7475940574382644455
 NavMeshAgent:

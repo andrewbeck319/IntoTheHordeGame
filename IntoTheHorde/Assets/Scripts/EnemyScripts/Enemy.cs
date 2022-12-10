@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
 
         agent.SetDestination(targetGroundPos);
 
-        if (distance <= stoppingDistance)
+        if (distance <= stoppingDistance * stoppingDistance)
         {
             //there's a bug where once an enemy is within stopping distance,
             //the player can rotate and get the enenmy to stop hitting them,
@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
                 agent.speed = thpeed;
                 agent.stoppingDistance = stoppingDistance;
             }
-		Animationcontroller.SetBool("attack",true);
+		    Animationcontroller.SetBool("attack",true);
             characterCombat.Attack();
         }
 
