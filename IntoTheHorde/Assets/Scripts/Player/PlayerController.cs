@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha2) && leapCount != playerStats.leapMaxCount.GetValue())
         {
-            Vector3 forceVec = new Vector3(0.0f, 0.5f * playerStats.leapHeight.GetValue(), 0.0f );
+            Vector3 forceVec = new Vector3(0.0f, 0.1f * playerStats.leapHeight.GetValue(), 0.0f );
             rb.AddForce(forceVec, ForceMode.Impulse);
             leapRegenDelay = playerStats.leapRegenRate.GetValue();
             leapCount++;
