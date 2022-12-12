@@ -41,13 +41,13 @@ public class ChestInteractable : Interactable
                     healthIncrease();
                     break;
                 case int n when (n > 40 && n <= 45):
-                    ps.BuffDamage(1.05f);
-                    StartCoroutine(setText("Damage buffed by 5 percent"));
+                    ps.BuffDamage(1.10f);
+                    StartCoroutine(setText("Damage buffed by 10 percent"));
                     Debug.Log("Damage buffed by 5 percent");
                     break;
                 case int n when (n > 45 && n <= 50):
-                    cc.atkSpdBuff(1.03f);
-                    StartCoroutine(setText("Attack Speed buffed by 3 percent"));
+                    cc.atkSpdBuff(1.10f);
+                    StartCoroutine(setText("Attack Speed buffed by 10 percent"));
                     Debug.Log("Attack Speed buffed by 3 percent");
                     break;
                 case int n when (n > 50 && n <= 55):
