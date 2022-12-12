@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour
     private bool canInvul = true; 
     private bool isInvul = false; 
 
+    // Particle System for Player 
+
+    public ParticleSystem invulnerabilityPS; 
+
     public bool playerInteracted = false;
     enum FacingDirection
     {
@@ -240,6 +244,18 @@ public class PlayerController : MonoBehaviour
         }
         regenDelay = playerStats.shieldRegenDelay.GetValue();
     }
+
+    private void ToggleInvulnerabiltyPS()
+    {
+        if(invulnerabilityPS.isPlaying)
+        {
+            invulnerabilityPS.Stop();
+        }
+        else{
+            invulnerabilityPS.Play();
+        }
+    }
+
     private IEnumerator PlayerInteract()
     {
         playerInteracted = true;
@@ -266,8 +282,10 @@ public class PlayerController : MonoBehaviour
     {
         canInvul = false; 
         isInvul = true; 
+        ToggleInvulnerabiltyPS();
         yield return new WaitForSeconds(invulTime);
         isInvul = false; 
+        ToggleInvulnerabiltyPS();
         yield return new WaitForSeconds(invulCooldown);
         canInvul = true; 
     }
