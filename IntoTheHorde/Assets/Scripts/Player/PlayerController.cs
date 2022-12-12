@@ -33,6 +33,13 @@ public class PlayerController : MonoBehaviour
     private float regenDelay;
     private float regenAccum = 0.0f;
 
+    //Invulnerability 
+
+    private float invulTime = 3.0f; 
+    private float invulCooldown = 5.0f; 
+    private bool canInvul = true; 
+    private bool isInvul = false; 
+
     public bool playerInteracted = false;
     enum FacingDirection
     {
@@ -171,7 +178,6 @@ public class PlayerController : MonoBehaviour
         {
 			Animationcontroller.SetBool("Attack",true);
             float randNum = Random.Range(0,3);
-            Debug.Log(randNum);
             if(randNum == 0)
             {
                 audioManager.Play("PlayerAttackSwing1");
@@ -211,18 +217,26 @@ public class PlayerController : MonoBehaviour
             leapCount++;
         }
 
+        if(Input.GetKeyDown(KeyCode.Alpha3) && canInvul)
+        {
+            Debug.Log("test");
+            StartCoroutine(Invulnerability());
+        }
+
     }
     public void TakeDamage(CharacterStats stats)
     {
-        shieldHandler.shieldSystem.Damage(stats.damage.GetValue());
-        if (shieldHandler.shieldSystem.GetShield() == 0)
-        {
-            healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
-            if (playerStats.NeedsToDie())
+        if(!isInvul){
+            shieldHandler.shieldSystem.Damage(stats.damage.GetValue());
+            if (shieldHandler.shieldSystem.GetShield() == 0)
             {
-                //Destroy(gameObject);
-                PlayerManager.instance.KillPlayer();
-            }//skill issue
+                healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
+                if (playerStats.NeedsToDie())
+                {
+                    //Destroy(gameObject);
+                    PlayerManager.instance.KillPlayer();
+                }//skill issue
+            }
         }
         regenDelay = playerStats.shieldRegenDelay.GetValue();
     }
@@ -246,5 +260,15 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private IEnumerator Invulnerability()
+    {
+        canInvul = false; 
+        isInvul = true; 
+        yield return new WaitForSeconds(invulTime);
+        isInvul = false; 
+        yield return new WaitForSeconds(invulCooldown);
+        canInvul = true; 
     }
 }

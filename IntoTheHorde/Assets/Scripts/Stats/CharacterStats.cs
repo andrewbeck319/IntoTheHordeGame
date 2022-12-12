@@ -19,6 +19,9 @@ public class CharacterStats : MonoBehaviour {
 	public Stat leapRegenRate;
 	public Stat leapHeight;
 
+	public Stat invulnerabilityTime; 
+	public Stat invulnerabilityLength; 
+
 	private bool shouldDie = false;
     // Set current health to max health
     // when starting the game.
