@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private MoneyHandler moneyHandler;
     [SerializeField] private TMP_Text enemyCountText;
     private int killCount = 0;
+    private int requiredKills = 5;
     private void Start()
     {
         enemySpawning = GetComponent<EnemySpawning>();
@@ -26,10 +27,11 @@ public class EnemyManager : MonoBehaviour
         killCount++;
         moneyHandler.addGold(5);
         enemySpawning.enemyCount--;
-        if(killCount >= 5)
+        if(killCount >= requiredKills)
         {
             enemySpawning.SpawnChest();
             killCount = 0;
+            requiredKills++;
         }
     }
 

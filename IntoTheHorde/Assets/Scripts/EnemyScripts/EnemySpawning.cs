@@ -8,7 +8,7 @@ public class EnemySpawning : MonoBehaviour
 {
     public Transform[] spawnPoints;
     public GameObject spawnPointContainer;
-    //public GameObject currentPoint;
+    public Transform currentPoint;
     public int index;
 
     public GameObject[] enemies;
@@ -46,22 +46,24 @@ public class EnemySpawning : MonoBehaviour
                 //spawnerDone = false;
                 spawnTime = 15f;
                 canSpawn = true;
-                Invoke("SpawnEnemy", 2f);
+                Invoke("SpawnEnemy", 0.5f);
             }
         }
     }
     public void SpawnEnemy()
     {
-        //index = Random.Range(0, spawnPoints.Length);
-        //currentPoint = spawnPoints[index];
+        index = Random.Range(0, spawnPoints.Length);
+        currentPoint = spawnPoints[index];
         //Vector3 spawnPosition = getRandomPosition();
         Transform nearestSpawn = getClosestSpawnPoint();
         float timeBetween = Random.Range(minTime, maxTime);
 
         if(canSpawn)
         {
-
-            Instantiate(enemies[Random.Range(0, enemies.Length)], nearestSpawn.position, Quaternion.identity);
+            if(enemyCount % 2 == 0)
+                Instantiate(enemies[Random.Range(0, enemies.Length)], nearestSpawn.position, Quaternion.identity);
+            else
+                Instantiate(enemies[Random.Range(0, enemies.Length)], currentPoint.position, Quaternion.identity);
             enemyCount++;
         }
 
