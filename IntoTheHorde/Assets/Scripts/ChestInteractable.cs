@@ -27,7 +27,7 @@ public class ChestInteractable : Interactable
     {
         if(interactable && mh.gold >= chestCost)
         {
-            mh.addGold(-15);
+            mh.addGold(chestCost * -1);
             base.Interact();
             System.Random rnd = new System.Random();
             int rndNumber = rnd.Next(0, 56); // 
@@ -73,6 +73,7 @@ public class ChestInteractable : Interactable
     private void healPlayer(int heal)
     {
         hs.Heal(heal);
+        updatePlayerHealth();
         StartCoroutine(setText("Healed player by " + heal + " HP")); 
         //Debug.Log("Healed player by 10 HP");
     }
@@ -82,6 +83,7 @@ public class ChestInteractable : Interactable
         int increase = (int)(0.05f * hs.GetMaxHealth());
         int newMaxHP = hs.GetMaxHealth() + increase;
         hs.SetMaxHealth(newMaxHP);
+        updatePlayerHealth();
         StartCoroutine(setText("Health increased to " + newMaxHP));
         //Debug.Log("Health Increased to: " + newMaxHP);
     }
@@ -103,7 +105,13 @@ public class ChestInteractable : Interactable
     private void dashDistanceIncrease()
     {
         PlayerController pc = player.gameObject.GetComponent<PlayerController>();
-        pc.dashingPower = pc.dashingPower * 0.05f;
+        pc.dashingPower = pc.dashingPower * 1.05f;
         StartCoroutine(setText("Dashing range increased by 5 percent"));
+    }
+
+    private void updatePlayerHealth()
+    {
+        ps.maxHealth = hs.GetMaxHealth();
+        ps.currentHealth = hs.GetHealth();
     }
 }

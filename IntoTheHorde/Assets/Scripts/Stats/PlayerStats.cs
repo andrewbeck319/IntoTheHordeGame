@@ -52,6 +52,7 @@ public class PlayerStats : CharacterStats {
 
     public override int TakeDamage(int damage)
     {
+		Debug.Log("Player Health: " + currentHealth);
 		if(damageable)
         {
 			return base.TakeDamage(damage);
