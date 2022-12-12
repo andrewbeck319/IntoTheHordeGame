@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
     public EnemySpawning enemySpawning;
     [SerializeField] private MoneyHandler moneyHandler;
     [SerializeField] private TMP_Text enemyCountText;
+    private int killCount = 0;
     private void Start()
     {
         enemySpawning = GetComponent<EnemySpawning>();
@@ -22,13 +23,13 @@ public class EnemyManager : MonoBehaviour
 
     public void OnEnemyDestroyed()
     {
+        killCount++;
         moneyHandler.addGold(5);
         enemySpawning.enemyCount--;
-        if (enemySpawning.spawnTime <= 0 && enemySpawning.enemyCount <= 0)
+        if(killCount >= 5)
         {
-            enemySpawning.spawnerDone = true;
-            enemySpawning.waitTime = 15f;
             enemySpawning.SpawnChest();
+            killCount = 0;
         }
     }
 

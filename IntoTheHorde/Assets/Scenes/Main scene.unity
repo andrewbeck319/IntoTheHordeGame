@@ -58227,13 +58227,12 @@ MonoBehaviour:
   index: 0
   enemies:
   - {fileID: 889248544876209145, guid: 630f097dddbcd8b48a314d13183dfe64, type: 3}
-  minTime: 1
-  maxTime: 3
+  minTime: 5
+  maxTime: 8
   canSpawn: 1
   spawnTime: 20
   waitTime: 0
   enemyCount: 0
-  spawnerDone: 0
   player: {fileID: 1233354628}
   chest: {fileID: 249367909}
   ChestPointers: {fileID: 305802711}
