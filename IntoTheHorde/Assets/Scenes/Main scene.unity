@@ -98888,8 +98888,12 @@ MonoBehaviour:
 
     Attack: Space
 
-    Abilities:
-    1, 2, 3
+    Dash: 1
+
+    Leap:
+    2
+
+    Invincibility: 3
 
     Interact: E
 

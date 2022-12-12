@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         this._isRunning = Input.GetKey(KeyCode.LeftShift);
         float speed = this._isRunning ? 6f : 3.5f;
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
 			Animationcontroller.SetBool("walk",true);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
             facingDirection = FacingDirection.Left;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D))
         {
 			Animationcontroller.SetBool("walk",true);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
@@ -158,21 +158,21 @@ public class PlayerController : MonoBehaviour
             facingDirection = FacingDirection.Right;
         }
         
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             Animationcontroller.SetBool("walk",true);
             this.transform.Translate((facingDirection == FacingDirection.Right) ? -Vector3.forward * speed * Time.deltaTime : Vector3.forward * speed * Time.deltaTime);
-        } else if (Input.GetKey(KeyCode.DownArrow))
+        } else if (Input.GetKey(KeyCode.S))
         {
             Animationcontroller.SetBool("walk",true);
             this.transform.Translate((facingDirection == FacingDirection.Right) ? Vector3.forward * speed * Time.deltaTime : -Vector3.forward * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, 0.5f, 0);
             this.transform.Rotate(0, 100f * Time.deltaTime, 0);
-        } else if (Input.GetKey(KeyCode.D))
+        } else if (Input.GetKey(KeyCode.LeftArrow))
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, -0.5f, 0);
             this.transform.Rotate(0, -100f * Time.deltaTime, 0);
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
             characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
-		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.Space))
         {
 		    Animationcontroller.SetBool("walk",false);
 		    Animationcontroller.SetBool("Attack",false);
