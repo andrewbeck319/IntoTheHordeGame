@@ -18,7 +18,7 @@ public class EnemySpawning : MonoBehaviour
     public float spawnTime;
     public float waitTime;
     public int enemyCount = 0;
-    public bool spawnerDone;
+    //public bool spawnerDone;
     public GameObject player;
     public GameObject chest;
     public GameObject ChestPointers;
@@ -38,12 +38,12 @@ public class EnemySpawning : MonoBehaviour
                 canSpawn = false;
             }
         }
-        else if(spawnerDone)
+        else
         {
             waitTime -= Time.deltaTime;
             if(waitTime < 0)
             {
-                spawnerDone = false;
+                //spawnerDone = false;
                 spawnTime = 15f;
                 canSpawn = true;
                 Invoke("SpawnEnemy", 0.5f);
@@ -65,10 +65,10 @@ public class EnemySpawning : MonoBehaviour
             enemyCount++;
         }
 
-        if(!spawnerDone)
-        {
-            Invoke("SpawnEnemy", timeBetween);
-        }
+        //if(!spawnerDone)
+        //{
+        Invoke("SpawnEnemy", timeBetween);
+        //}
     }
 
     //public Vector3 getRandomPosition()

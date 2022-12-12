@@ -28,7 +28,7 @@ public class CharacterStats : MonoBehaviour {
 	}
 
 	// Damage the character
-	public int TakeDamage (int damage)
+	public virtual int TakeDamage (int damage)
 	{
 
 		// Subtract the armor value

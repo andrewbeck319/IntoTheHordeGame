@@ -30,24 +30,24 @@ public class ChestInteractable : Interactable
             mh.addGold(-15);
             base.Interact();
             System.Random rnd = new System.Random();
-            int rndNumber = rnd.Next(0, 51); // 
-
+            int rndNumber = rnd.Next(0, 56); // 
+            healPlayer(20);
             switch (rndNumber)
             {
                 case int n when (n <= 30):
-                    healPlayer();
+                    healPlayer(100);
                     break;
                 case int n when (n > 30 && n <= 40):
                     healthIncrease();
                     break;
                 case int n when (n > 40 && n <= 45):
-                    ps.BuffDamage(1.05f);
-                    StartCoroutine(setText("Damage buffed by 5 percent"));
+                    ps.BuffDamage(1.10f);
+                    StartCoroutine(setText("Damage buffed by 10 percent"));
                     Debug.Log("Damage buffed by 5 percent");
                     break;
                 case int n when (n > 45 && n <= 50):
-                    cc.atkSpdBuff(1.03f);
-                    StartCoroutine(setText("Attack Speed buffed by 3 percent"));
+                    cc.atkSpdBuff(1.10f);
+                    StartCoroutine(setText("Attack Speed buffed by 10 percent"));
                     Debug.Log("Attack Speed buffed by 3 percent");
                     break;
                 case int n when (n > 50 && n <= 55):
@@ -59,8 +59,10 @@ public class ChestInteractable : Interactable
                     break;
             }
             chestCost += 5;
-            StartCoroutine(delayedDestroy(1));
             interactable = false;
+            StartCoroutine(delayedDestroy(1));
+            this.enabled = false;
+            
         }
         else if(mh.gold < chestCost)
         {
@@ -68,11 +70,11 @@ public class ChestInteractable : Interactable
         }
     }
 
-    private void healPlayer()
+    private void healPlayer(int heal)
     {
-        hs.Heal(10);
-        StartCoroutine(setText("Healed player by 10 HP")); 
-        Debug.Log("Healed player by 10 HP");
+        hs.Heal(heal);
+        StartCoroutine(setText("Healed player by " + heal + " HP")); 
+        //Debug.Log("Healed player by 10 HP");
     }
 
     private void healthIncrease()
@@ -81,7 +83,7 @@ public class ChestInteractable : Interactable
         int newMaxHP = hs.GetMaxHealth() + increase;
         hs.SetMaxHealth(newMaxHP);
         StartCoroutine(setText("Health increased to " + newMaxHP));
-        Debug.Log("Health Increased to: " + newMaxHP);
+        //Debug.Log("Health Increased to: " + newMaxHP);
     }
 
     private IEnumerator setText(string text)
