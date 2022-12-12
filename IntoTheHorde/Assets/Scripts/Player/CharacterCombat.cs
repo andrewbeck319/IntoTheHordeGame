@@ -92,4 +92,9 @@ public class CharacterCombat : MonoBehaviour {
     {
 		attackSpeed = attackSpeed * percent;
     }
+
+	public bool attackOffCooldown()
+    {
+		return attackCooldown <= 0;
+    }
 }

@@ -181,17 +181,21 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
 			Animationcontroller.SetBool("Attack",true);
-            float randNum = Random.Range(0,3);
-            if(randNum == 0)
+            if (characterCombat.attackOffCooldown())
             {
-                audioManager.Play("PlayerAttackSwing1");
-            }
-            else if (randNum == 1)
-            {
-                audioManager.Play("PlayerAttackSwing2");
-            }
-            else if (randNum == 2){
-                audioManager.Play("PlayerAttackSwing3");
+                float randNum = Random.Range(0, 3);
+                if (randNum == 0)
+                {
+                    audioManager.Play("PlayerAttackSwing1");
+                }
+                else if (randNum == 1)
+                {
+                    audioManager.Play("PlayerAttackSwing2");
+                }
+                else if (randNum == 2)
+                {
+                    audioManager.Play("PlayerAttackSwing3");
+                }
             }
             characterCombat.Attack();
         }
