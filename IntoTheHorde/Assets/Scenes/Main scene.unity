@@ -63350,6 +63350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints: []
   spawnPointContainer: {fileID: 896648634}
+  currentPoint: {fileID: 0}
   index: 0
   enemies:
   - {fileID: 889248544876209145, guid: 630f097dddbcd8b48a314d13183dfe64, type: 3}
@@ -98909,7 +98910,9 @@ MonoBehaviour:
 
     Interact: E
 
-    SURVIVE AS LONG AS POSSIBLE'
+    SURVIVE AS LONG AS POSSIBLE
+
+    <----'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

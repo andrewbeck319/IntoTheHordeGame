@@ -260,6 +260,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void invulnerabilityBuff(float percent)
+    {
+        invulTime *= percent;
+    }
     private IEnumerator PlayerInteract()
     {
         playerInteracted = true;

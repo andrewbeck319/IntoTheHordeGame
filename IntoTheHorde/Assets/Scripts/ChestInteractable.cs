@@ -9,9 +9,11 @@ public class ChestInteractable : Interactable
     private PlayerStats ps;
     private CharacterCombat cc;
     private MoneyHandler mh;
+    private PlayerController pc;
     private bool interactable = true;
     private static int chestCost = 15;
     [SerializeField] private TMP_Text text;
+    private static System.Random rnd;
 
     public void Start()
     {
@@ -21,6 +23,8 @@ public class ChestInteractable : Interactable
         ps = player.gameObject.GetComponent<PlayerStats>();
         cc = player.gameObject.GetComponent<CharacterCombat>();
         mh = FindObjectOfType<MoneyHandler>();
+        pc = player.gameObject.GetComponent<PlayerController>();
+        rnd = new System.Random();
     }
 
     public override void Interact()
@@ -29,18 +33,18 @@ public class ChestInteractable : Interactable
         {
             mh.addGold(chestCost * -1);
             base.Interact();
-            System.Random rnd = new System.Random();
-            int rndNumber = rnd.Next(0, 56); // 
+            
+            int rndNumber = rnd.Next(0, 66); // 
             healPlayer(20);
             switch (rndNumber)
             {
-                case int n when (n <= 30):
+                case int n when (n <= 15):
                     healPlayer(100);
                     break;
-                case int n when (n > 30 && n <= 40):
+                case int n when (n > 15 && n <= 30):
                     healthIncrease();
                     break;
-                case int n when (n > 40 && n <= 45):
+                case int n when (n > 30 && n <= 45):
                     ps.BuffDamage(1.10f);
                     StartCoroutine(setText("Damage buffed by 10 percent"));
                     Debug.Log("Damage buffed by 5 percent");
@@ -52,6 +56,12 @@ public class ChestInteractable : Interactable
                     break;
                 case int n when (n > 50 && n <= 55):
                     dashDistanceIncrease();
+                    break;
+                case int n when (n > 55 && n <= 60):
+                    invulnerabilityTimeBuff();
+                    break;
+                case int n when (n > 60 && n <= 65):
+                    leapHeightBuff();
                     break;
                 default:
                     StartCoroutine(setText("You opened a chest full of nothing :("));
@@ -113,5 +123,17 @@ public class ChestInteractable : Interactable
     {
         ps.maxHealth = hs.GetMaxHealth();
         ps.currentHealth = hs.GetHealth();
+    }
+
+    private void invulnerabilityTimeBuff()
+    {
+        pc.invulnerabilityBuff(1.03f);
+        StartCoroutine(setText("Invulnerability time increased by 3 percent"));
+    }
+
+    private void leapHeightBuff()
+    {
+        ps.leapHeight.AddModifier(5);
+        StartCoroutine(setText("Leap Height increased"));
     }
 }
