@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats {
 
-	private float iFrames = 0.5f;
-	private bool damageable = true;
 	public int healthOnKill = 0;
 	// Use this for initialization
 	void Start () {
@@ -16,14 +14,7 @@ public class PlayerStats : CharacterStats {
 
     private void Update()
     {
-        if(!damageable)
-        {
-			iFrames -= Time.deltaTime;
-        }
-		if(iFrames <= 0)
-        {
-			damageable = true;
-        }
+
     }
     // Called when an item gets equipped/unequipped
     void OnEquipmentChanged (Equipment newItem, Equipment oldItem)
@@ -54,10 +45,6 @@ public class PlayerStats : CharacterStats {
     public override int TakeDamage(int damage)
     {
 		Debug.Log("Player Health: " + currentHealth);
-		if(damageable)
-        {
-			return base.TakeDamage(damage);
-		}
-		return 0;
+		return base.TakeDamage(damage);
     }
 }

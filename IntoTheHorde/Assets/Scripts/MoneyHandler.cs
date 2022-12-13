@@ -6,6 +6,7 @@ public class MoneyHandler : MonoBehaviour
 {
     [SerializeField] public int gold { get; set; }
     [SerializeField] private TMP_Text text;
+    public int totalGold = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class MoneyHandler : MonoBehaviour
     public void addGold(int gold)
     {
         this.gold += gold;
+        this.totalGold += gold;
         text.SetText("Gold: " + this.gold);
     }
 }

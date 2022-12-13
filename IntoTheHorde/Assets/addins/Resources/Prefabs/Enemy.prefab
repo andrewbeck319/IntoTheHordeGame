@@ -141,6 +141,10 @@ MonoBehaviour:
     baseValue: 0
   leapHeight:
     baseValue: 0
+  invulnerabilityTime:
+    baseValue: 0
+  invulnerabilityLength:
+    baseValue: 0
 --- !u!195 &7475940574382644455
 NavMeshAgent:
   m_ObjectHideFlags: 0

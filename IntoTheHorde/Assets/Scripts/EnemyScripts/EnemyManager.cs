@@ -14,6 +14,7 @@ public class EnemyManager : MonoBehaviour
     private HealthSystem healthSystem;
     private int killCount = 0;
     private int requiredKills = 5;
+    public int totalKills = 0;
     private void Start()
     {
         enemySpawning = GetComponent<EnemySpawning>();
@@ -30,6 +31,7 @@ public class EnemyManager : MonoBehaviour
     {
         healOnKill();
         killCount++;
+        totalKills++;
         moneyHandler.addGold(5);
         enemySpawning.enemyCount--;
         if(killCount >= requiredKills)
