@@ -24,7 +24,8 @@ public class MoneyHandler : MonoBehaviour
     public void addGold(int gold)
     {
         this.gold += gold;
-        this.totalGold += gold;
+        if (gold > 0)
+            this.totalGold += gold;
         text.SetText("Gold: " + this.gold);
     }
 }
