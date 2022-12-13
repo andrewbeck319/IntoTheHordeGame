@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class DeathScreenController : MonoBehaviour
 {
-    [SerializeField] private TMP_Text stats;
+    [SerializeField] private TMP_Text EnemiesKilledText;
+    [SerializeField] private TMP_Text TimeSurvivedText;
+    [SerializeField] private TMP_Text MoneyCollectedText;
     [SerializeField] private MoneyHandler moneyHandler;
     [SerializeField] private EnemyManager enemyManager;
     // Start is called before the first frame update
@@ -46,6 +48,9 @@ public class DeathScreenController : MonoBehaviour
 
     public void updateStats()
     {
-        stats.SetText("Enemies killed: " + enemyManager.totalKills + "\nTime Survived: " + Time.timeSinceLevelLoad.ToString("N0") + "s\nTotal Gold Collected: " + moneyHandler.totalGold);
+        //stats.SetText("Enemies killed: " + enemyManager.totalKills + "\nTime Survived: " + Time.timeSinceLevelLoad.ToString("N0") + "s\nTotal Gold Collected: " + moneyHandler.totalGold);
+        this.EnemiesKilledText.SetText( "Kills: " + enemyManager.totalKills);
+        this.TimeSurvivedText.SetText( "Time survived: " + Time.timeSinceLevelLoad.ToString("N0") + "s");
+        this.TimeSurvivedText.SetText( "Money collected: " + moneyHandler.totalGold);
     }
 }
