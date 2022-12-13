@@ -51,6 +51,6 @@ public class DeathScreenController : MonoBehaviour
         //stats.SetText("Enemies killed: " + enemyManager.totalKills + "\nTime Survived: " + Time.timeSinceLevelLoad.ToString("N0") + "s\nTotal Gold Collected: " + moneyHandler.totalGold);
         this.EnemiesKilledText.SetText( "Kills: " + enemyManager.totalKills);
         this.TimeSurvivedText.SetText( "Time survived: " + Time.timeSinceLevelLoad.ToString("N0") + "s");
-        this.TimeSurvivedText.SetText( "Money collected: " + moneyHandler.totalGold);
+        this.MoneyCollectedText.SetText( "Money collected: " + moneyHandler.totalGold);
     }
 }
