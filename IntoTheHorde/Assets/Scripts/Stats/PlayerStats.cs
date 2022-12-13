@@ -8,6 +8,7 @@ public class PlayerStats : CharacterStats {
 
 	private float iFrames = 0.5f;
 	private bool damageable = true;
+	public int healthOnKill = 0;
 	// Use this for initialization
 	void Start () {
 		//EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged; equipment is todo

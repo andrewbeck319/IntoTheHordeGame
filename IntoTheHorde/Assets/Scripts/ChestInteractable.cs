@@ -34,7 +34,7 @@ public class ChestInteractable : Interactable
             mh.addGold(chestCost * -1);
             base.Interact();
             
-            int rndNumber = rnd.Next(0, 66); // 
+            int rndNumber = rnd.Next(0, 91); // 
             healPlayer(20);
             switch (rndNumber)
             {
@@ -49,23 +49,26 @@ public class ChestInteractable : Interactable
                     StartCoroutine(setText("Damage buffed by 10 percent"));
                     Debug.Log("Damage buffed by 5 percent");
                     break;
-                case int n when (n > 45 && n <= 50):
+                case int n when (n > 45 && n <= 55):
                     cc.atkSpdBuff(1.10f);
                     StartCoroutine(setText("Attack Speed buffed by 10 percent"));
-                    Debug.Log("Attack Speed buffed by 3 percent");
+                    //Debug.Log("Attack Speed buffed by 10 percent");
                     break;
-                case int n when (n > 50 && n <= 55):
+                case int n when (n > 55 && n <= 65):
                     dashDistanceIncrease();
                     break;
-                case int n when (n > 55 && n <= 60):
+                case int n when (n > 65 && n <= 70):
                     invulnerabilityTimeBuff();
                     break;
-                case int n when (n > 60 && n <= 65):
+                case int n when (n > 70 && n <= 75):
                     leapHeightBuff();
+                    break;
+                case int n when (n > 75 && n < 90):
+                    healOnKillBuff();
                     break;
                 default:
                     StartCoroutine(setText("You opened a chest full of nothing :("));
-                    Debug.Log("You Opened a Chest Full of Nothing :(");
+                    //Debug.Log("You Opened a Chest Full of Nothing :(");
                     break;
             }
             chestCost += 5;
@@ -131,6 +134,11 @@ public class ChestInteractable : Interactable
         StartCoroutine(setText("Invulnerability time increased by 3 percent"));
     }
 
+    private void healOnKillBuff()
+    {
+        ps.healthOnKill += 5;
+        StartCoroutine(setText("Gain " + ps.healthOnKill + " health every kill"));
+    }
     private void leapHeightBuff()
     {
         ps.leapHeight.AddModifier(5);
