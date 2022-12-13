@@ -33,6 +33,17 @@ public class PlayerController : MonoBehaviour
     private float regenDelay;
     private float regenAccum = 0.0f;
 
+    //Invulnerability 
+
+    private float invulTime = 3.0f; 
+    private float invulCooldown = 5.0f; 
+    private bool canInvul = true; 
+    private bool isInvul = false; 
+
+    // Particle System for Player 
+
+    public ParticleSystem invulnerabilityPS; 
+
     public bool playerInteracted = false;
     enum FacingDirection
     {
@@ -99,7 +110,7 @@ public class PlayerController : MonoBehaviour
         this._isRunning = Input.GetKey(KeyCode.LeftShift);
         float speed = this._isRunning ? 6f : 3.5f;
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
 			Animationcontroller.SetBool("walk",true);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
@@ -125,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
             facingDirection = FacingDirection.Left;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D))
         {
 			Animationcontroller.SetBool("walk",true);
             this.transform.Translate(-Vector3.right * speed * Time.deltaTime);
@@ -147,21 +158,21 @@ public class PlayerController : MonoBehaviour
             facingDirection = FacingDirection.Right;
         }
         
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             Animationcontroller.SetBool("walk",true);
             this.transform.Translate((facingDirection == FacingDirection.Right) ? -Vector3.forward * speed * Time.deltaTime : Vector3.forward * speed * Time.deltaTime);
-        } else if (Input.GetKey(KeyCode.DownArrow))
+        } else if (Input.GetKey(KeyCode.S))
         {
             Animationcontroller.SetBool("walk",true);
             this.transform.Translate((facingDirection == FacingDirection.Right) ? Vector3.forward * speed * Time.deltaTime : -Vector3.forward * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, 0.5f, 0);
             this.transform.Rotate(0, 100f * Time.deltaTime, 0);
-        } else if (Input.GetKey(KeyCode.D))
+        } else if (Input.GetKey(KeyCode.LeftArrow))
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, -0.5f, 0);
             this.transform.Rotate(0, -100f * Time.deltaTime, 0);
@@ -170,23 +181,26 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
 			Animationcontroller.SetBool("Attack",true);
-            float randNum = Random.Range(0,3);
-            Debug.Log(randNum);
-            if(randNum == 0)
+            if (characterCombat.attackOffCooldown())
             {
-                audioManager.Play("PlayerAttackSwing1");
-            }
-            else if (randNum == 1)
-            {
-                audioManager.Play("PlayerAttackSwing2");
-            }
-            else if (randNum == 2){
-                audioManager.Play("PlayerAttackSwing3");
+                float randNum = Random.Range(0, 3);
+                if (randNum == 0)
+                {
+                    audioManager.Play("PlayerAttackSwing1");
+                }
+                else if (randNum == 1)
+                {
+                    audioManager.Play("PlayerAttackSwing2");
+                }
+                else if (randNum == 2)
+                {
+                    audioManager.Play("PlayerAttackSwing3");
+                }
             }
             characterCombat.Attack();
         }
         lastFacingDirection = facingDirection;
-		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.Space))
         {
 		    Animationcontroller.SetBool("walk",false);
 		    Animationcontroller.SetBool("Attack",false);
@@ -211,20 +225,44 @@ public class PlayerController : MonoBehaviour
             leapCount++;
         }
 
+        if(Input.GetKeyDown(KeyCode.Alpha3) && canInvul)
+        {
+            Debug.Log("test");
+            StartCoroutine(Invulnerability());
+        }
+
     }
     public void TakeDamage(CharacterStats stats)
     {
-        shieldHandler.shieldSystem.Damage(stats.damage.GetValue());
-        if (shieldHandler.shieldSystem.GetShield() == 0)
-        {
-            healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
-            if (playerStats.NeedsToDie())
+        if(!isInvul){
+            shieldHandler.shieldSystem.Damage(stats.damage.GetValue());
+            if (shieldHandler.shieldSystem.GetShield() == 0)
             {
-                //Destroy(gameObject);
-                PlayerManager.instance.KillPlayer();
-            }//skill issue
+                healthHandler.healthSystem.Damage(playerStats.TakeDamage(stats.damage.GetValue()));
+                if (playerStats.NeedsToDie())
+                {
+                    //Destroy(gameObject);
+                    PlayerManager.instance.KillPlayer();
+                }//skill issue
+            }
         }
         regenDelay = playerStats.shieldRegenDelay.GetValue();
+    }
+
+    private void ToggleInvulnerabiltyPS()
+    {
+        if(invulnerabilityPS.isPlaying)
+        {
+            invulnerabilityPS.Stop();
+        }
+        else{
+            invulnerabilityPS.Play();
+        }
+    }
+
+    public void invulnerabilityBuff(float percent)
+    {
+        invulTime *= percent;
     }
     private IEnumerator PlayerInteract()
     {
@@ -246,5 +284,17 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private IEnumerator Invulnerability()
+    {
+        canInvul = false; 
+        isInvul = true; 
+        ToggleInvulnerabiltyPS();
+        yield return new WaitForSeconds(invulTime);
+        isInvul = false; 
+        ToggleInvulnerabiltyPS();
+        yield return new WaitForSeconds(invulCooldown);
+        canInvul = true; 
     }
 }

@@ -6,7 +6,7 @@ public class CharacterStats : MonoBehaviour {
 
 	// Health
 	public int maxHealth = 100;
-	public int currentHealth { get; private set; }
+	public int currentHealth { get; set; }
 
 	public Stat damage;
 	public Stat shield;
@@ -18,6 +18,9 @@ public class CharacterStats : MonoBehaviour {
 	public Stat leapMaxCount;
 	public Stat leapRegenRate;
 	public Stat leapHeight;
+
+	public Stat invulnerabilityTime; 
+	public Stat invulnerabilityLength; 
 
 	private bool shouldDie = false;
     // Set current health to max health
