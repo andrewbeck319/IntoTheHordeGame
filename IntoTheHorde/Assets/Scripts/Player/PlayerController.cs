@@ -169,12 +169,12 @@ public class PlayerController : MonoBehaviour
             this.transform.Translate((facingDirection == FacingDirection.Right) ? Vector3.forward * speed * Time.deltaTime : -Vector3.forward * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow) && !rotating)
+        if (Input.GetKey(KeyCode.E) && !rotating)
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, 0.5f, 0);
             //this.transform.Rotate(0, 90, 0);
             StartCoroutine(cameraRotate(90));
-        } else if (Input.GetKey(KeyCode.LeftArrow) && !rotating)
+        } else if (Input.GetKey(KeyCode.Q) && !rotating)
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, -0.5f, 0);
             //this.transform.Rotate(0, -90, 0);
@@ -209,18 +209,18 @@ public class PlayerController : MonoBehaviour
 		    Animationcontroller.SetBool("Attack",false);
 		}
 
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.F))
         {
             StartCoroutine(PlayerInteract());
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1) && canDash)
+        if(Input.GetKeyDown(KeyCode.J) && canDash)
         {
             audioManager.Play("PlayerAttackSwing");
             StartCoroutine(Dash());
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha2) && leapCount != playerStats.leapMaxCount.GetValue())
+        if(Input.GetKeyDown(KeyCode.K) && leapCount != playerStats.leapMaxCount.GetValue())
         {
             Vector3 forceVec = new Vector3(0.0f, 0.1f * playerStats.leapHeight.GetValue(), 0.0f );
             rb.AddForce(forceVec, ForceMode.Impulse);
@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
             leapCount++;
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha3) && canInvul)
+        if(Input.GetKeyDown(KeyCode.L) && canInvul)
         {
             Debug.Log("test");
             StartCoroutine(Invulnerability());
