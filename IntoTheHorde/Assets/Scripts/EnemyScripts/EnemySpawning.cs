@@ -18,6 +18,7 @@ public class EnemySpawning : MonoBehaviour
     public float spawnTime;
     public float waitTime;
     public int enemyCount = 0;
+    public int enemyCap = 20;
     //public bool spawnerDone;
     public GameObject player;
     public GameObject chest;
@@ -52,25 +53,25 @@ public class EnemySpawning : MonoBehaviour
     }
     public void SpawnEnemy()
     {
-        index = Random.Range(0, spawnPoints.Length);
-        currentPoint = spawnPoints[index];
-        //Vector3 spawnPosition = getRandomPosition();
-        Transform nearestSpawn = getClosestSpawnPoint();
-        float timeBetween = Random.Range(minTime, maxTime);
-
-        if(canSpawn)
+        if (enemyCount < enemyCap)
         {
-            if(enemyCount % 2 == 0)
-                Instantiate(enemies[Random.Range(0, enemies.Length)], nearestSpawn.position, Quaternion.identity);
-            else
-                Instantiate(enemies[Random.Range(0, enemies.Length)], currentPoint.position, Quaternion.identity);
-            enemyCount++;
-        }
+            index = Random.Range(0, spawnPoints.Length);
+            currentPoint = spawnPoints[index];
+            //Vector3 spawnPosition = getRandomPosition();
+            Transform nearestSpawn = getClosestSpawnPoint();
+            float timeBetween = Random.Range(minTime, maxTime);
 
-        //if(!spawnerDone)
-        //{
-        Invoke("SpawnEnemy", timeBetween);
-        //}
+            if (canSpawn)
+            {
+                if (enemyCount % 2 == 0)
+                    Instantiate(enemies[Random.Range(0, enemies.Length)], nearestSpawn.position, Quaternion.identity);
+                else
+                    Instantiate(enemies[Random.Range(0, enemies.Length)], currentPoint.position, Quaternion.identity);
+                enemyCount++;
+            }
+
+            Invoke("SpawnEnemy", timeBetween);
+        }
     }
 
     //public Vector3 getRandomPosition()

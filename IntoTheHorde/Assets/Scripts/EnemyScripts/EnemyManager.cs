@@ -40,6 +40,10 @@ public class EnemyManager : MonoBehaviour
             killCount = 0;
             requiredKills++;
         }
+        if(totalKills > 2 * enemySpawning.enemyCap)
+        {
+            enemySpawning.enemyCap++;
+        }
     }
 
     // Update is called once per frame

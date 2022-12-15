@@ -27,6 +27,11 @@ public class ChestInteractable : Interactable
         rnd = new System.Random();
     }
 
+    private void Awake()
+    {
+        chestCost = 15;
+    }
+
     public override void Interact()
     {
         if(interactable && mh.gold >= chestCost)
@@ -136,7 +141,7 @@ public class ChestInteractable : Interactable
 
     private void healOnKillBuff()
     {
-        ps.healthOnKill += 5;
+        ps.healthOnKill += 1;
         StartCoroutine(setText("Gain " + ps.healthOnKill + " health every kill"));
     }
     private void leapHeightBuff()
