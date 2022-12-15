@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private HealthHandler healthHandler;
     private CharacterCombat characterCombat;
     private AudioManager audioManager;
-
+    private bool rotating = false;
 
     //Ability shit==================
 
@@ -125,16 +125,16 @@ public class PlayerController : MonoBehaviour
                 Transform camGet = this.transform.GetChild(4);
                 Vector3 camPos = camGet.position;
                 Quaternion camRot = camGet.rotation;
-
-                transform.RotateAround(transform.position, transform.up, 180f);
+                if(!rotating)
+                    transform.RotateAround(transform.position, transform.up, 180f);
 
                 //cam after
                 this.transform.GetChild(4).position = camPos;
                 this.transform.GetChild(4).rotation = camRot;
             }
 
-
-            facingDirection = FacingDirection.Left;
+            if(!rotating)
+                facingDirection = FacingDirection.Left;
         }
         else if (Input.GetKey(KeyCode.D))
         {
@@ -149,13 +149,14 @@ public class PlayerController : MonoBehaviour
                 Vector3 camPos = camGet.position;
                 Quaternion camRot = camGet.rotation;
 
-                transform.RotateAround(transform.position, transform.up, -180f);
+                if(!rotating)
+                    transform.RotateAround(transform.position, transform.up, -180f);
                 this.transform.GetChild(4).position = camPos;
                 this.transform.GetChild(4).rotation = camRot;
 
             }
-
-            facingDirection = FacingDirection.Right;
+            if(!rotating)
+                facingDirection = FacingDirection.Right;
         }
         
         if (Input.GetKey(KeyCode.W))
@@ -168,14 +169,16 @@ public class PlayerController : MonoBehaviour
             this.transform.Translate((facingDirection == FacingDirection.Right) ? Vector3.forward * speed * Time.deltaTime : -Vector3.forward * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) && !rotating)
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, 0.5f, 0);
-            this.transform.Rotate(0, 100f * Time.deltaTime, 0);
-        } else if (Input.GetKey(KeyCode.LeftArrow))
+            //this.transform.Rotate(0, 90, 0);
+            StartCoroutine(cameraRotate(90));
+        } else if (Input.GetKey(KeyCode.LeftArrow) && !rotating)
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, -0.5f, 0);
-            this.transform.Rotate(0, -100f * Time.deltaTime, 0);
+            //this.transform.Rotate(0, -90, 0);
+            StartCoroutine(cameraRotate(-90));
         }
 
         if(Input.GetKey(KeyCode.Space))
@@ -296,5 +299,19 @@ public class PlayerController : MonoBehaviour
         ToggleInvulnerabiltyPS();
         yield return new WaitForSeconds(invulCooldown);
         canInvul = true; 
+    }
+
+    private IEnumerator cameraRotate(float angle)
+    {
+        rotating = true;
+        var begin = transform.rotation;
+        var end = begin * Quaternion.Euler(0, angle, 0);
+
+        for (var t = 0f; t < 1; t += Time.deltaTime/0.5f)
+        {
+            this.transform.rotation = Quaternion.Slerp(begin, end, t);
+            yield return null;
+        }
+        rotating = false;
     }
 }
