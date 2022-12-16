@@ -174,12 +174,12 @@ public class PlayerController : MonoBehaviour
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, 0.5f, 0);
             //this.transform.Rotate(0, 90, 0);
-            StartCoroutine(cameraRotate(90));
+            StartCoroutine(cameraRotate(45));
         } else if (Input.GetKey(KeyCode.Q) && !rotating)
         {
             // this.GetComponent<Rigidbody>().AddTorque(0, -0.5f, 0);
             //this.transform.Rotate(0, -90, 0);
-            StartCoroutine(cameraRotate(-90));
+            StartCoroutine(cameraRotate(-45));
         }
 
         if(Input.GetKey(KeyCode.Space))

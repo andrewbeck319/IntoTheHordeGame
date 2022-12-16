@@ -65,10 +65,28 @@ public class EnemySpawning : MonoBehaviour
 
             if (canSpawn)
             {
-                if (enemyCount % 2 == 0)
-                    Instantiate(enemies[Random.Range(0, enemies.Length)], nearestSpawn.position, Quaternion.identity);
-                else
-                    Instantiate(enemies[Random.Range(0, enemies.Length)], currentPoint.position, Quaternion.identity);
+                GameObject spawnedEnemy;
+                
+                if (enemyCount % 2 == 0) spawnedEnemy = Instantiate(enemies[Random.Range(0, enemies.Length)], nearestSpawn.position, Quaternion.identity);
+                else spawnedEnemy = Instantiate(enemies[Random.Range(0, enemies.Length)], currentPoint.position, Quaternion.identity);
+
+
+                //do silly color
+                if(Random.value < .50f)
+                {
+                    spawnedEnemy.transform.Find("Enemy sprite").gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+                }
+
+                //do silly size
+                if(Random.value < .20f)
+                {
+                    float scaleFactor = (1.0f * Random.value) * (2.0f * Random.value);
+                    if (scaleFactor < .2f) scaleFactor = .2f;
+                    Vector3 scale = spawnedEnemy.transform.localScale;
+                    scale.Set(scaleFactor, scaleFactor, scaleFactor);
+                    spawnedEnemy.transform.localScale = scale;
+                }
+                
                 enemyCount++;
             }
 

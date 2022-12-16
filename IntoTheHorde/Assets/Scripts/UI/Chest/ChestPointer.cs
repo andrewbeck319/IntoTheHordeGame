@@ -41,20 +41,10 @@ public class ChestPointer : MonoBehaviour
             chestPosition.y = playerPosition.y;
             Vector3 directionVector = (chestPosition - playerPosition).normalized;
 
-            //could flip the positionss of both vectors so we can avoid the -angleFromCam
-            float angleFromCam = Vector3.SignedAngle(originVector, directionVector, Vector3.up);
+            float angleFromCam = Vector3.SignedAngle(directionVector, originVector, Vector3.up);
 
-            pointerRectTransform.localEulerAngles = new Vector3(0, 0, -angleFromCam);
+            pointerRectTransform.localEulerAngles = new Vector3(0, 0, angleFromCam);
         }
-
-        //Vector3 toPosition = targetPosition;
-        //Vector3 fromPosition = GameObject.Find("Player/CameraContainer/Main Camera").transform.position;
-        //fromPosition.z = 0f;
-        //Vector3 dir = (toPosition - fromPosition).normalized;
-        //dir = dir.normalized;
-        //float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //if (n < 0) n += 360;
-        //pointerRectTransform.localEulerAngles = new Vector3(0, 0, n);
     }
     IEnumerator ChestDestroyTimer(float time)
     {
