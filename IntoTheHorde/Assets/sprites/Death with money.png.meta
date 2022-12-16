@@ -170,10 +170,10 @@ TextureImporter:
       name: Death with money_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 505
-        width: 66
-        height: 70
+        x: 93
+        y: 1245
+        width: 174
+        height: 213
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,10 +191,10 @@ TextureImporter:
       name: Death with money_2
       rect:
         serializedVersion: 2
-        x: 206
-        y: 479
-        width: 107
-        height: 104
+        x: 518
+        y: 1184
+        width: 292
+        height: 251
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,10 +212,10 @@ TextureImporter:
       name: Death with money_3
       rect:
         serializedVersion: 2
-        x: 324
-        y: 431
-        width: 218
-        height: 197
+        x: 815
+        y: 1079
+        width: 502
+        height: 483
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,10 +233,10 @@ TextureImporter:
       name: Death with money_5
       rect:
         serializedVersion: 2
-        x: 3
-        y: 205
-        width: 304
-        height: 269
+        x: 45
+        y: 506
+        width: 733
+        height: 669
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -254,10 +254,10 @@ TextureImporter:
       name: Death with money_6
       rect:
         serializedVersion: 2
-        x: 316
-        y: 223
-        width: 235
-        height: 204
+        x: 806
+        y: 547
+        width: 566
+        height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,10 +275,10 @@ TextureImporter:
       name: Death with money_8
       rect:
         serializedVersion: 2
-        x: 568
-        y: 50
-        width: 197
-        height: 154
+        x: 1383
+        y: 120
+        width: 478
+        height: 395
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -296,10 +296,10 @@ TextureImporter:
       name: Death with money_4
       rect:
         serializedVersion: 2
-        x: 556
-        y: 397
-        width: 266
-        height: 228
+        x: 1388
+        y: 983
+        width: 696
+        height: 575
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,10 +317,10 @@ TextureImporter:
       name: Death with money_1
       rect:
         serializedVersion: 2
-        x: 121
-        y: 499
-        width: 74
-        height: 75
+        x: 287
+        y: 1234
+        width: 206
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,10 +338,10 @@ TextureImporter:
       name: Death with money_7
       rect:
         serializedVersion: 2
-        x: 563
-        y: 215
-        width: 260
-        height: 179
+        x: 1404
+        y: 528
+        width: 607
+        height: 446
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
