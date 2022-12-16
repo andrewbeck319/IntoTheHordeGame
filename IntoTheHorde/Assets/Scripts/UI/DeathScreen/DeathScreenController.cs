@@ -38,6 +38,7 @@ public class DeathScreenController : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ChestInteractable.resetChestCost();
     }
 
     public void GoToMenu()

@@ -26,12 +26,6 @@ public class ChestInteractable : Interactable
         pc = player.gameObject.GetComponent<PlayerController>();
         rnd = new System.Random();
     }
-
-    private void Awake()
-    {
-        chestCost = 15;
-    }
-
     public override void Interact()
     {
         if(interactable && mh.gold >= chestCost)
@@ -39,7 +33,7 @@ public class ChestInteractable : Interactable
             mh.addGold(chestCost * -1);
             base.Interact();
             
-            int rndNumber = rnd.Next(0, 91); // 
+            int rndNumber = rnd.Next(0, 90); // 
             healPlayer(20);
             switch (rndNumber)
             {
@@ -148,5 +142,10 @@ public class ChestInteractable : Interactable
     {
         ps.leapHeight.AddModifier(5);
         StartCoroutine(setText("Leap Height increased"));
+    }
+
+    public static void resetChestCost()
+    {
+        chestCost = 15;
     }
 }

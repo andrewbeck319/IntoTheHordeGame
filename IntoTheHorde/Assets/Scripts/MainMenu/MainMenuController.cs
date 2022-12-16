@@ -13,6 +13,7 @@ public class MainMenuController : MonoBehaviour
     public void LoadGameScene()
     {
         SceneManager.LoadScene(1);
+        ChestInteractable.resetChestCost();
     }
 
     public void QuitGame()
