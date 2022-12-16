@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private CharacterCombat characterCombat;
     private AudioManager audioManager;
     private bool rotating = false;
+    public AudioSource gameMusic; 
 
     //Ability shit==================
 
@@ -247,6 +248,7 @@ public class PlayerController : MonoBehaviour
                 if (playerStats.NeedsToDie())
                 {
                     //Destroy(gameObject);
+                    gameMusic.Stop();
                     PlayerManager.instance.KillPlayer();
                 }//skill issue
             }
