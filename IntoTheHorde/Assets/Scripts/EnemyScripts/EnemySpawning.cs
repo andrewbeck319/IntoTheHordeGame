@@ -70,7 +70,6 @@ public class EnemySpawning : MonoBehaviour
                 if (enemyCount % 2 == 0) spawnedEnemy = Instantiate(enemies[Random.Range(0, enemies.Length)], nearestSpawn.position, Quaternion.identity);
                 else spawnedEnemy = Instantiate(enemies[Random.Range(0, enemies.Length)], currentPoint.position, Quaternion.identity);
 
-
                 //do silly color
                 if(Random.value < .50f)
                 {
@@ -86,7 +85,7 @@ public class EnemySpawning : MonoBehaviour
                     scale.Set(scaleFactor, scaleFactor, scaleFactor);
                     spawnedEnemy.transform.localScale = scale;
                 }
-                
+                spawnedEnemy.GetComponent<Enemy>().thpeed = 3.0f + (3.0f * Random.value); 
                 enemyCount++;
             }
 
