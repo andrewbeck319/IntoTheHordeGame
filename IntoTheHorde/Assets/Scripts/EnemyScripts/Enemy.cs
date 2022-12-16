@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     Vector3 targetGroundPos;
     private float stoppingDistance;
     public float counterSpeedMult = 1.5f;
-    private float thpeed;
+    public float thpeed;
 
     enum FacingDirection
     {
@@ -47,7 +47,6 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         stoppingDistance = agent.stoppingDistance;
-        thpeed = agent.speed;
 
         healthHandler.healthSystem.SetMaxHealth(enemyStats.maxHealth);
         healthHandler.healthSystem.SetHealthPercent(100);
@@ -74,7 +73,7 @@ public class Enemy : MonoBehaviour
             //the player can rotate and get the enenmy to stop hitting them,
             //the fix is to get them to re-route to either the front or back of the player
             //by finding the attack position and temporarily disabling stopping distance until they're there.
-
+            agent.speed = thpeed;
             float EPSILON = 0.1f;
             Vector3 attackPosition = FindAttackPosition();
             distance = ((attackPosition.x - transform.position.x) * (attackPosition.x - transform.position.x))
@@ -97,10 +96,11 @@ public class Enemy : MonoBehaviour
                 agent.speed = thpeed;
                 agent.stoppingDistance = stoppingDistance;
             }
-		    Animationcontroller.SetBool("attack",true);
+            Animationcontroller.SetBool("attack", true);
             characterCombat.Attack();
         }
-
+        else if (distance >= 20 * 20) agent.speed = thpeed * 1.50f;
+        else agent.speed = thpeed;
     }
 
     private void FaceCamera()
