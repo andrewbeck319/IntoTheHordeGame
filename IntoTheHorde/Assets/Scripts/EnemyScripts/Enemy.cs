@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     private HealthHandler healthHandler;
     private CharacterCombat characterCombat;
 
+    private AudioManager audioManager;
+
     Transform target;
     Transform mainCamera;
     NavMeshAgent agent;
@@ -49,6 +51,8 @@ public class Enemy : MonoBehaviour
 
         healthHandler.healthSystem.SetMaxHealth(enemyStats.maxHealth);
         healthHandler.healthSystem.SetHealthPercent(100);
+
+        audioManager = FindObjectOfType<AudioManager>();
     }
     // Make sure this gets called when player attacks enemy
 
@@ -157,8 +161,19 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(CharacterStats stats)
     {
         healthHandler.healthSystem.Damage(enemyStats.TakeDamage(stats.damage.GetValue()));
+        float randNum = Random.Range(0, 2);
+        if (randNum == 0)
+        {
+            audioManager.Play("OrcHit");
+        }
+        else if (randNum == 1)
+        {
+            audioManager.Play("OrcHit2");
+        }
+       
         if (enemyStats.NeedsToDie())
         {
+            audioManager.Play("OrcGrunt1");
             enemyManager.OnEnemyDestroyed();
             Destroy(gameObject);
         }

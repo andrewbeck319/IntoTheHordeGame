@@ -23,10 +23,12 @@ public class EnemySpawning : MonoBehaviour
     public GameObject player;
     public GameObject chest;
     public GameObject ChestPointers;
+    private AudioManager audioManager;
     private void Start()
     {
         spawnPoints = spawnPointContainer.transform.GetComponentsInChildren<Transform>().Skip(1).ToArray();
         Invoke("SpawnEnemy", 8f);
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -71,6 +73,7 @@ public class EnemySpawning : MonoBehaviour
             }
 
             Invoke("SpawnEnemy", timeBetween);
+            audioManager.Play("OrcGrunt2");
         }
     }
 

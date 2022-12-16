@@ -216,12 +216,13 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.J) && canDash)
         {
-            audioManager.Play("PlayerAttackSwing");
+            audioManager.Play("Dash");
             StartCoroutine(Dash());
         }
 
         if(Input.GetKeyDown(KeyCode.K) && leapCount != playerStats.leapMaxCount.GetValue())
         {
+            audioManager.Play("Jump");
             Vector3 forceVec = new Vector3(0.0f, 0.1f * playerStats.leapHeight.GetValue(), 0.0f );
             rb.AddForce(forceVec, ForceMode.Impulse);
             leapRegenDelay = playerStats.leapRegenRate.GetValue();
@@ -230,7 +231,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.L) && canInvul)
         {
-            Debug.Log("test");
+            audioManager.Play("Invulnerability");
             StartCoroutine(Invulnerability());
         }
 
@@ -238,6 +239,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(CharacterStats stats)
     {
         if(!isInvul){
+            audioManager.Play("PlayerHit");
             shieldHandler.shieldSystem.Damage(stats.damage.GetValue());
             if (shieldHandler.shieldSystem.GetShield() == 0)
             {
