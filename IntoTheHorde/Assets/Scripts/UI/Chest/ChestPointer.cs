@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class ChestPointer : MonoBehaviour
 {
@@ -15,6 +14,8 @@ public class ChestPointer : MonoBehaviour
     public GameObject player;
     public GameObject camera;
 
+    [SerializeField] public float destroyChestTimer = 30.0f;
+
     private void Awake()
     {
         pointerRectTransform = transform.GetComponent<RectTransform>();
@@ -27,25 +28,24 @@ public class ChestPointer : MonoBehaviour
     }
     private void Update()
     {
-        chestPosition = chest.transform.position;
-        playerPosition = player.transform.position;
-        cameraPosition = camera.transform.position;
+        if (chest != null)
+        {
+            StartCoroutine(ChestDestroyTimer(destroyChestTimer));
+            chestPosition = chest.transform.position;
+            playerPosition = player.transform.position;
+            cameraPosition = camera.transform.position;
 
-        cameraPosition.y = playerPosition.y;
-        Vector3 originVector = (cameraPosition - playerPosition).normalized;
+            cameraPosition.y = playerPosition.y;
+            Vector3 originVector = (cameraPosition - playerPosition).normalized;
 
-        chestPosition.y = playerPosition.y;
-        Vector3 directionVector = (chestPosition - playerPosition).normalized;
+            chestPosition.y = playerPosition.y;
+            Vector3 directionVector = (chestPosition - playerPosition).normalized;
 
-        //could flip the positionss of both vectors so we can avoid the -angleFromCam
-        float angleFromCam = Vector3.SignedAngle(originVector, directionVector, Vector3.up);
+            //could flip the positionss of both vectors so we can avoid the -angleFromCam
+            float angleFromCam = Vector3.SignedAngle(originVector, directionVector, Vector3.up);
 
-        pointerRectTransform.localEulerAngles = new Vector3(0, 0, -angleFromCam);
-
-
-
-
-
+            pointerRectTransform.localEulerAngles = new Vector3(0, 0, -angleFromCam);
+        }
 
         //Vector3 toPosition = targetPosition;
         //Vector3 fromPosition = GameObject.Find("Player/CameraContainer/Main Camera").transform.position;
@@ -55,5 +55,11 @@ public class ChestPointer : MonoBehaviour
         //float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         //if (n < 0) n += 360;
         //pointerRectTransform.localEulerAngles = new Vector3(0, 0, n);
+    }
+    IEnumerator ChestDestroyTimer(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        Destroy(chest);
+        Destroy(this.transform.gameObject);
     }
 }
